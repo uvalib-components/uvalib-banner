@@ -1,5 +1,7 @@
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../app-layout/app-box/app-box.html">
+<link rel="import" href="../app-layout/app-scroll-effects/effects/parallax-background.html">
+<link rel="import" href="../iron-pages/iron-pages.html">
 <link rel="import" href="../uvalib-theme/uvalib-theme.html">
 
 <!--
@@ -23,6 +25,26 @@ Library web banner
         color: var(--color-primary-blue);
       }
 
+      app-box.banner.new {
+        --app-box-background-front-layer: {
+          background-image: url(//static.lib.virginia.edu/images/homepage-images/newresources.png);
+          background-position: bottom;
+          padding-bottom: 180px;
+          margin-top: -20px;
+          height: 100%;
+        };
+      }
+
+      app-box.banner.ann {
+        --app-box-background-front-layer: {
+          background-image: url(//static.lib.virginia.edu/images/homepage-images/annespencerbanner.png);
+          background-position: bottom;
+          padding-bottom: 180px;
+          margin-top: -20px;
+          height: 100%;
+        };
+      }
+
       /* desktop */
       @media (min-width: 993px) {
         app-box {
@@ -30,15 +52,7 @@ Library web banner
           height: 700px;
           width: 100%;
         }
-        app-box.banner {
-          --app-box-background-front-layer: {
-            background-image: url(//static.lib.virginia.edu/images/homepage-images/newresources.png);
-            background-position: bottom;
-            padding-bottom: 180px;
-            margin-top: -20px;
-            height: 100%;
-          };
-        }
+
         #banner-txt {
           position: relative;
           top: 155px;
@@ -60,15 +74,7 @@ Library web banner
           height: 475px;
           width: 100%;
         }
-        app-box.banner {
-          --app-box-background-front-layer: {
-            background-image: url(//static.lib.virginia.edu/images/homepage-images/newresources.png);
-            background-position: bottom;
-            padding-bottom: 180px;
-            margin-top: -20px;
-            height: 100%;
-          };
-        }
+
         #banner-txt {
           position: relative;
           top: 125px;
@@ -91,15 +97,7 @@ Library web banner
           height: 375px;
           width: 100%;
         }
-        app-box.banner {
-          --app-box-background-front-layer: {
-            background-image: url(//static.lib.virginia.edu/images/homepage-images/newresources.png);
-            background-position: bottom;
-            padding-bottom: 100px;
-            margin-top: -20px;
-            height: 100%;
-          };
-        }
+
         #banner-txt {
           position: relative;
           top: 125px;
@@ -116,18 +114,38 @@ Library web banner
         }
       }
     </style>
-    <app-box class="banner" effects="parallax-background">
+    <iron-pages id="banners" selected="{{_randomBanner()}}">
+    <app-box class="banner new" effects="parallax-background">
       <div id="banner-txt">
         <h2>Don't miss a new resource</h2>
         <p>Find the newest resources the Library has to offer - the latest databases, books, videos, and journals.</p>
         <uvalib-button href="http://guides.lib.virginia.edu/newresources">See New Resources</uvalib-button>
       </div>
     </app-box>
+    <app-box class="banner ann" effects="parallax-background">
+      <div id="banner-txt" style="padding: 20px; width: 80%; background-color: rgba(0, 47, 108, .5);">
+        <h2 style="color:white;">Sacred Spaces: The Home and Poetry of Anne Spencer</h2>
+        <p style="color:white">An exhibition in the Albert and Shirley Small Special Collections Library celebrating the legacy of the acclaimed poet and civil rights activist.</p>
+        <uvalib-button style="color:white" href="http://bit.ly/2cbfboZ">Read about the exhibition</uvalib-button>
+      </div>
+    </app-box>
+    <iron-pages>
   </template>
 
   <script>
     Polymer({
-      is: 'uvalib-banner'
+      is: 'uvalib-banner',
+/*
+      properties: {
+        randomBanner: {
+          type: Number,
+          computed: 'randomBanner()'
+        }
+      },
+*/
+      _randomBanner: function(){
+        return Math.round(Math.random()*1);
+      }
     });
   </script>
 </dom-module>

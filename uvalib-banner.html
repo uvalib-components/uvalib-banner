@@ -121,11 +121,15 @@ Library web banner
       }
     </style>
     <iron-pages id="banners" selected="{{_randomBanner()}}">
-    <div class="banner first">
-      <div id="banner-txt">
-        <uvalib-button href="http://shakespeare.lib.virginia.edu/">Read more</uvalib-button>
+    <a href="http://shakespeare.lib.virginia.edu/">
+      <div class="banner first">
+        <!--
+        <div id="banner-txt">
+          <uvalib-button href="http://shakespeare.lib.virginia.edu/">Read more</uvalib-button>
+        </div>
+      -->
       </div>
-    </div>
+    </a>
     <a href="http://search.lib.virginia.edu/catalog?portal=all&catalog_select=all&sort=date_received_facet+desc&q=Rosh+Hashanah">
       <div class="banner rosh">
         <div id="banner-txt">

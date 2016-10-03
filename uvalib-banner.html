@@ -121,7 +121,7 @@ Library web banner
         }
       }
     </style>
-<!--
+
     <iron-pages id="banners" selected="{{_randomBanner()}}">
     <!--<a style="display:block" href="http://shakespeare.lib.virginia.edu/">-->
 <!--      <div class="banner first"> -->
@@ -142,14 +142,14 @@ Library web banner
         </div>
       </div>
     </a>
-<!--    <iron-pages> -->
+    <iron-pages>
   </template>
 
   <script>
     Polymer({
       is: 'uvalib-banner',
       _randomBanner: function(){
-        return Math.round(Math.random()*1);
+        return 0; // Math.round(Math.random()*1);
       }
     });
   </script>

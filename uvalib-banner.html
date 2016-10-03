@@ -19,6 +19,7 @@ Library web banner
       }
 
       #container {
+        height: 100%;
         @apply(--layout-vertical);
       }
 
@@ -59,13 +60,14 @@ Library web banner
         width: 100%;
       }
 
+      .banner {
+        position: relative;
+        height: 100%;
+        width: 100%;
+      }
+
       /* desktop */
       @media (min-width: 993px) {
-        .banner {
-          position: relative;
-          height: 600px;
-          width: 100%;
-        }
 
         #banner-txt {
           position: relative;
@@ -84,11 +86,6 @@ Library web banner
       }
       /* tablet */
       @media (min-width: 601px) and (max-width: 992px) {
-        .banner {
-          position: relative;
-          height: 500px;
-          width: 100%;
-        }
 
         #banner-txt {
           position: relative;
@@ -108,11 +105,6 @@ Library web banner
       }
       /* mobile */
       @media (max-width: 600px) {
-        .banner {
-          position: relative;
-          height: 300px;
-          width: 100%;
-        }
 
         #banner-txt {
           position: relative;

@@ -133,16 +133,16 @@ Library web banner
     </style>
 
     <div id="container">
-    <iron-pages id="banners" selected="0">
-    <!--<a style="display:block" href="http://shakespeare.lib.virginia.edu/">-->
-<!--      <div class="banner first"> -->
-        <!--
+    <iron-pages id="banners" selected="{{_randomBanner()}}">
+    <a style="display:block" href="http://shakespeare.lib.virginia.edu/">
+      <div class="banner first">
+      <!--
         <div id="banner-txt">
           <uvalib-button href="http://shakespeare.lib.virginia.edu/">Read more</uvalib-button>
         </div>
       -->
-<!--      </div> -->
-    <!--</a>-->
+      </div>
+    </a>
     <a style="display:block" href="http://search.lib.virginia.edu/catalog?portal=all&catalog_select=all&sort=date_received_facet+desc&q=Rosh+Hashanah">
       <div class="banner rosh">
         <div id="banner-txt">
@@ -161,7 +161,7 @@ Library web banner
     Polymer({
       is: 'uvalib-banner',
       _randomBanner: function(){
-        return 0; // Math.round(Math.random()*1);
+        return Math.round(Math.random()*1);
       }
     });
   </script>

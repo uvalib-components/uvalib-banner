@@ -139,6 +139,16 @@ Library web banner
 
     <div id="container">
     <iron-pages id="banners" selected="{{_randomBanner()}}">
+      <a style="display:block" href="http://search.lib.virginia.edu/catalog?portal=all&catalog_select=all&sort=date_received_facet+desc&q=Rosh+Hashanah">
+        <div class="banner rosh">
+          <div id="banner-txt">
+            <h2 style="color:white;">l'SHANAH TOVAH!</h2>
+            <p style="color:white">Torah, undated (20th century).<br />
+              McGehee Miniature Book Collection,<br />
+              Albert and Shirley Small Special Collections Library.</p>
+          </div>
+        </div>
+      </a>
       <a style="display:block" href="http://shakespeare.lib.virginia.edu/">
         <div class="banner first">
         <!--
@@ -156,7 +166,7 @@ Library web banner
     Polymer({
       is: 'uvalib-banner',
       _randomBanner: function(){
-        return 0; //Math.round(Math.random()*1);
+        return Math.round(Math.random()*1);
       }
     });
   </script>

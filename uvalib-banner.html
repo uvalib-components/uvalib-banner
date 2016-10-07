@@ -29,9 +29,18 @@ Library web banner
     </style>
 
     <a href="http://bit.ly/FolioFamilyDay">
-      <iron-image width="100%" preload fade
-      placeholder="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAICAMAAAD+zz7+AAABNVBMVEXSnqriycflyMbmycfhxMO0mJu7n6HjxsTgw8LiycbSn6rnycj///DV1sfMzb/39+X6+unNzsCwsqb//+36+uj5+ef8/+zlyMeqipCsrqNjYV9IR0Z3dXC6t62Jh4GQjoerqKCxr6a3tKu7vbG0lZpOLz4tMzI2NTdXVldWVVdVVFZXVlhKSUsyMTOko6W8vL3BwcK7vr6LbXpVNkQ3PDo4NzhjY2OBgIFnZmd6eXpZWFnNzc3h4OHY2Njm6eifgY42OzlCQUJpaWl2dnZra2tycnJeXV5AP0DU1NTl5eXa2trz9fShg5BSN0MyPDk5PTxQVFNZXlxYXFtfY2JMUE/V2tjx9vTq7+37//6fhZBnMklQN0NUNkNTNUJXOUZWOEVYOkdVN0RTNkKRdICegY2eg46FUWeV0x3uAAAAMUlEQVQI12NkYAQCCAEiuRnhAMSVQOWqMqIAYyj9mw3C5UWR9YXSDxTBVBRC5oUkIwCe8gTKwsKRpgAAAABJRU5ErkJggg=="
-      src="//uvalib.github.io/web-banners/media/firstfolio/FamilyDay_BannerA.png"></iron-image>
+      <template is="dom-if" if="{{smallScreen}}">
+        <iron-image width="100%" preload fade placeholder="{{placeHolder}}"
+        src="//uvalib.github.io/web-banners/media/firstfolio/FamilyDay_BannerC.png"></iron-image>
+      </template>
+      <template is="dom-if" if="{{mediumScreen}}">
+        <iron-image width="100%" preload fade placeholder="{{placeHolder}}"
+        src="//uvalib.github.io/web-banners/media/firstfolio/FamilyDay_BannerB.png"></iron-image>
+      </template>
+      <template is="dom-if" if="{{largeScreen}}">
+        <iron-image width="100%" preload fade placeholder="{{placeHolder}}"
+        src="//uvalib.github.io/web-banners/media/firstfolio/FamilyDay_BannerA.png"></iron-image>
+      </template>
     </a>
 
   </template>
@@ -39,6 +48,15 @@ Library web banner
   <script>
     Polymer({
       is: 'uvalib-banner',
+      properties: {
+        _placeHolder: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAICAMAAAD+zz7+AAABNVBMVEXSnqriycflyMbmycfhxMO0mJu7n6HjxsTgw8LiycbSn6rnycj///DV1sfMzb/39+X6+unNzsCwsqb//+36+uj5+ef8/+zlyMeqipCsrqNjYV9IR0Z3dXC6t62Jh4GQjoerqKCxr6a3tKu7vbG0lZpOLz4tMzI2NTdXVldWVVdVVFZXVlhKSUsyMTOko6W8vL3BwcK7vr6LbXpVNkQ3PDo4NzhjY2OBgIFnZmd6eXpZWFnNzc3h4OHY2Njm6eifgY42OzlCQUJpaWl2dnZra2tycnJeXV5AP0DU1NTl5eXa2trz9fShg5BSN0MyPDk5PTxQVFNZXlxYXFtfY2JMUE/V2tjx9vTq7+37//6fhZBnMklQN0NUNkNTNUJXOUZWOEVYOkdVN0RTNkKRdICegY2eg46FUWeV0x3uAAAAMUlEQVQI12NkYAQCCAEiuRnhAMSVQOWqMqIAYyj9mw3C5UWR9YXSDxTBVBRC5oUkIwCe8gTKwsKRpgAAAABJRU5ErkJggg==",
+        smallScreen: Boolean,
+        mediumScreen: Boolean,
+        largeScreen: {
+          type: Boolean,
+          value: true
+        },
+      },
     });
   </script>
 </dom-module>

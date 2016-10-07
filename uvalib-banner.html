@@ -1,4 +1,5 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-image/iron-image.html">
 <link rel="import" href="../iron-pages/iron-pages.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../uvalib-theme/uvalib-theme.html">
@@ -16,161 +17,23 @@ Library web banner
     <style is="custom-style" include="uvalib-theme">
       :host {
         display: block;
-      }
-
-      #container {
-        height: 100%;
-        @apply(--layout-vertical);
-      }
-
-      iron-pages {
-        @apply(--layout-flex);
-        height: 100%;
         width: 100%;
+        height: auto;
       }
-
-      iron-pages a {
-        height: 100%;
-      }
-
-      .banner uvalib-button {
-        --uvalib-button-bkgrd-color: var(--uvalib-grey-200);
-        color: var(--color-primary-blue);
-      }
-      .banner h2, .banner p {
-        color: var(--color-primary-blue);
-      }
-
-      .banner.first {
-        /* background: url(//static.lib.virginia.edu/images/homepage-images/firstfolio.png) no-repeat center center; */
-        background: url(//uvalib.github.io/web-banners/media/firstfolio/FamilyDay_BannerA.png) no-repeat center center;
-        background-size: cover;
-        background-position: top;
-        width: 100%;
-      }
-      .first uvalib-button {
-        color: var(--color-white);
-        --uvalib-button-bkgrd-color: var(--color-medium-blue);
-        --uvalib-button-font-weight: var(--font-weight-medium);
-      }
-      .first #banner-txt {
-        top: 70%;
-        left: 20%;
-      }
-
-      .banner.rosh {
-        background: url(//static.lib.virginia.edu/images/homepage-images/rosh.png) no-repeat center center;
-        background-size: cover;
-        background-position: bottom;
-        width: 100%;
-      }
-
-      /* desktop */
-      @media (min-width: 993px) {
-        .banner {
-          position: relative;
-          height: 100%;
-          width: 100%;
-        }
-
-        #banner-txt {
-          position: absolute;
-          top: 125px;
-          left: 120px;
-        }
-
-        .banner h2 {
-          font-size: 65px;
-        }
-        .banner p {
-          font-size: 20px;
-          font-weight: 200;
-          max-width: 70%;
-        }
-      }
-      /* tablet */
-      @media (min-width: 601px) and (max-width: 992px) {
-        .banner {
-          position: relative;
-          height: 500px;
-          width: 100%;
-        }
-
-        #banner-txt {
-          position: absolute;
-          top: 125px;
-          left: 40px;
-        }
-
-        .banner h2 {
-          font-size: 40px;
-        }
-        .banner p {
-          font-size: 20px;
-          font-weight: 200;
-          width: 70%;
-          line-height: 22px;
-        }
-      }
-      /* mobile */
-      @media (max-width: 600px) {
-        .banner {
-          position: relative;
-          height: 300px;
-          width: 100%;
-        }
-
-        #banner-txt {
-          position: absolute;
-          top: 30px;
-          left: 30px;
-          max-width: 250px;
-        }
-
-        .banner h2 {
-          font-size: 25px;
-        }
-        .banner p {
-          font-size: 15px;
-          font-weight: 200;
-          line-height: 17px;
-        }
+      iron-image {
+        --iron-image-width: 100%;
       }
     </style>
 
-    <div id="container">
-    <iron-pages id="banners" selected="{{_randomBanner()}}">
-      <!--
-      <a style="display:block" href="http://search.lib.virginia.edu/catalog?portal=all&catalog_select=all&sort=date_received_facet+desc&q=Rosh+Hashanah">
-        <div class="banner rosh">
-          <div id="banner-txt">
-            <h2 style="color:white;">l'SHANAH TOVAH!</h2>
-            <p style="color:white">Torah, undated (20th century).<br />
-              McGehee Miniature Book Collection,<br />
-              Albert and Shirley Small Special Collections Library.</p>
-          </div>
-        </div>
-      </a>
-    -->
-      <a style="display:block" href="http://shakespeare.lib.virginia.edu/">
-        <div class="banner first">
-        <!--
-          <div id="banner-txt">
-            <uvalib-button href="http://shakespeare.lib.virginia.edu/">Read more</uvalib-button>
-          </div>
-        -->
-        </div>
-      </a>
-    <iron-pages>
-    </div>
+    <a href="http://bit.ly/FolioFamilyDay">
+      <iron-image width="100%" src="//uvalib.github.io/web-banners/media/firstfolio/FamilyDay_BannerA.png"></iron-image>
+    </a>
+
   </template>
 
   <script>
     Polymer({
       is: 'uvalib-banner',
-      _randomBanner: function(){
-        return 0; //Math.round(Math.random()*1);
-      }
     });
   </script>
 </dom-module>

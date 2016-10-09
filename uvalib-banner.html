@@ -30,7 +30,7 @@ Library web banner
       }
     </style>
 
-    <iron-ajax auto url="./banners.json" handle-as="json" last-response="{{banners}}"></iron-ajax>
+    <iron-ajax auto url="https://uvalib.github.io/web-banners/banners.json" handle-as="json" last-response="{{banners}}"></iron-ajax>
     <iron-pages id="" selected="{{_randomBanner(banners)}}">
       <template is="dom-repeat" items="{{banners.banners}}">
         <a href="{{item.link}}">

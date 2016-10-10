@@ -35,15 +35,21 @@ Library web banner
       <template is="dom-repeat" items="{{banners.banners}}">
         <a href="{{item.link}}">
           <template is="dom-if" if="{{smallScreen}}">
-            <iron-image width="100%" preload fade placeholder="{{item.placeHolder}}"
+            <iron-image width="100%" preload fade
+            placeholder="{{item.placeHolder}}"
+            alt="{{item.altText}}"
             src="{{item.smallImage}}"></iron-image>
           </template>
           <template is="dom-if" if="{{mediumScreen}}">
-            <iron-image width="100%" preload fade placeholder="{{item.placeHolder}}"
+            <iron-image width="100%" preload fade
+            placeholder="{{item.placeHolder}}"
+            alt="{{item.altText}}"
             src="{{item.mediumImage}}"></iron-image>
           </template>
           <template is="dom-if" if="{{largeScreen}}">
-            <iron-image width="100%" preload fade placeholder="{{item.placeHolder}}"
+            <iron-image width="100%" preload fade
+            placeholder="{{item.placeHolder}}"
+            alt="{{item.altText}}"
             src="{{item.largeImage}}"></iron-image>
           </template>
         </a>

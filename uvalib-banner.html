@@ -20,6 +20,7 @@ Library web banner
         display: block;
         width: 100%;
         height: auto;
+        position: relative;
       }
       iron-image {
         width: 100%;
@@ -28,12 +29,24 @@ Library web banner
           background-size: cover;
         }
       }
+      text-box: {
+
+      }
+
     </style>
 
     <iron-ajax auto url="https://uvalib.github.io/web-banners/banners.json" handle-as="json" last-response="{{banners}}"></iron-ajax>
+    <!--<iron-ajax auto url="./banner.json" handle-as="json" last-response="{{banners}}"></iron-ajax>-->
+
     <iron-pages id="" selected="{{_randomBanner(banners)}}">
       <template is="dom-repeat" items="{{banners.banners}}">
+        <!--
+        <template is="dom-if" if="{{_isTextBox(item)}}">
+          <div class="text-box">Foo Bar</div>
+        </template>
+        -->
         <a href="{{item.link}}">
+          </tempalte>
           <template is="dom-if" if="{{smallScreen}}">
             <iron-image width="100%" preload fade
             placeholder="{{item.placeHolder}}"
@@ -69,10 +82,15 @@ Library web banner
           value: true
         },
       },
+      _isTextBox: function(item){
+        return (item.title || item.description || item.action);
+      },
       _randomBanner: function(){
         var numBanners = (this.banners)? this.banners.banners.length:0;
         if (numBanners <= 1) return 0;
-        else return Math.random() * (numBanners-1);
+        else {
+          return Math.round(Math.random()*(numBanners-1));
+        }
       }
     });
   </script>

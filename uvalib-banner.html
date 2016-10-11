@@ -48,20 +48,17 @@ Library web banner
         <a href="{{item.link}}">
           </tempalte>
           <template is="dom-if" if="{{smallScreen}}">
-            <iron-image width="100%" preload fade
-            placeholder="{{item.placeholder}}"
+            <iron-image width="100%"
             alt="{{item.altText}}"
             src="{{item.smallImage}}"></iron-image>
           </template>
           <template is="dom-if" if="{{mediumScreen}}">
-            <iron-image width="100%" preload fade
-            placeholder="{{item.placeholder}}"
+            <iron-image width="100%"
             alt="{{item.altText}}"
             src="{{item.mediumImage}}"></iron-image>
           </template>
           <template is="dom-if" if="{{largeScreen}}">
-            <iron-image width="100%" preload fade
-            placeholder="{{item.placeholder}}"
+            <iron-image width="100%"
             alt="{{item.altText}}"
             src="{{item.largeImage}}"></iron-image>
           </template>

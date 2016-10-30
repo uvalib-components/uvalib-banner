@@ -2,10 +2,14 @@
 <link rel="import" href="../iron-ajax/iron-ajax.html">
 <link rel="import" href="../iron-image/iron-image.html">
 <link rel="import" href="../iron-pages/iron-pages.html">
+<link rel="import" href="../app-layout/app-scroll-effects/effects/parallax-background.html">
+<link rel="import" href="../app-layout/app-box/app-box.html">
+<link rel="import" href="../uvalib-button/uvalib-button.html">
+<link rel="import" href="../uvalib-theme/uvalib-theme.html">
 <!--
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../uvalib-theme/uvalib-theme.html">
-<link rel="import" href="../uvalib-button/uvalib-button.html">
+
 -->
 
 <!--
@@ -29,8 +33,67 @@ Library web banner
           background-size: cover;
         }
       }
-      text-box: {
 
+      .container {
+        position: relative;
+        height: 600px;
+        width: auto;
+        background-color: #f3f3f3;
+        background-size: cover !important;
+      }
+
+      .text-container {
+        max-width: 1044px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .text-container .text {
+        font-size: 21px;
+
+        font-family: sofia-pro,Helvetica Neue,sans-serif;
+        padding-top: 40px;
+
+        color: #fff;
+        text-align: left;
+      }
+
+      uvalib-button {
+        display: block;
+        color: white;
+        --uvalib-button-bkgrd-color: var(--color-primary-blue);
+        padding-top: 25px;
+      }
+
+      /* large */
+      @media (min-width: 1100px) {
+        .text-container {
+          padding: 70px 30px;
+        }
+      }
+      /* desktop */
+      @media (min-width: 993px) {
+        .text-container {
+          padding: 70px 30px;
+        }
+      }
+      /* tablet */
+      @media (min-width: 601px) and (max-width: 992px) {
+        .text-container {
+          padding: 70px 30px;
+        }
+        .text-container .text {
+          line-height: 26px;
+        }
+      }
+      /* mobile */
+      @media (max-width: 600px) {
+        .text-container {
+          padding: 100px 25px;
+        }
+        .text-container .text {
+          line-height: 28px;
+        }
       }
 
     </style>
@@ -40,29 +103,34 @@ Library web banner
 
     <iron-pages id="" selected="{{_randomBanner(banners)}}">
       <template is="dom-repeat" items="{{banners.banners}}">
-        <!--
-        <template is="dom-if" if="{{_isTextBox(item)}}">
-          <div class="text-box">Foo Bar</div>
+        <template is="dom-if" if="{{item.image}}">
+          <div class="container" style="background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url({{item.image}}) no-repeat 50% fixed;">
+            <div class="text-container">
+              <div class="text">{{item.text}}</div>
+              <uvalib-button raised href="{{item.link}}">{{item.buttonText}}</uvalib-button>
+            </div>
+          </div>
         </template>
-        -->
-        <a href="{{item.link}}">
-          </tempalte>
-          <template is="dom-if" if="{{smallScreen}}">
-            <iron-image width="100%" preload fade
-            alt="{{item.altText}}"
-            src="{{item.smallImage}}"></iron-image>
-          </template>
-          <template is="dom-if" if="{{mediumScreen}}">
-            <iron-image width="100%" preload fade
-            alt="{{item.altText}}"
-            src="{{item.mediumImage}}"></iron-image>
-          </template>
-          <template is="dom-if" if="{{largeScreen}}">
-            <iron-image width="100%" preload fade
-            alt="{{item.altText}}"
-            src="{{item.largeImage}}"></iron-image>
-          </template>
-        </a>
+        <template is="dom-if" if="{{!item.image}}">
+          <a href="{{item.link}}">
+            </tempalte>
+            <template is="dom-if" if="{{smallScreen}}">
+              <iron-image width="100%" preload fade
+              alt="{{item.altText}}"
+              src="{{item.smallImage}}"></iron-image>
+            </template>
+            <template is="dom-if" if="{{mediumScreen}}">
+              <iron-image width="100%" preload fade
+              alt="{{item.altText}}"
+              src="{{item.mediumImage}}"></iron-image>
+            </template>
+            <template is="dom-if" if="{{largeScreen}}">
+              <iron-image width="100%" preload fade
+              alt="{{item.altText}}"
+              src="{{item.largeImage}}"></iron-image>
+            </template>
+          </a>
+        </template>
       </template>
     </iron-pages>
 

@@ -49,12 +49,15 @@ Library web banner
         margin-right: auto;
       }
 
+      .text-container .textTitle {
+        @apply(--font-display3);
+        font-weight: 900;
+        color: var(--color-white);
+      }
       .text-container .text {
         font-size: 21px;
-
         font-family: sofia-pro,Helvetica Neue,sans-serif;
         padding-top: 40px;
-
         color: #fff;
         text-align: left;
       }
@@ -107,6 +110,7 @@ Library web banner
         <template is="dom-if" if="{{item.image}}">
           <div class="container" style="">
             <div class="text-container">
+              <div class="textTitle">{{item.textTitle}}</div>
               <div class="text">{{item.text}}</div>
               <uvalib-button raised href="{{item.link}}">{{item.buttonText}}</uvalib-button>
             </div>

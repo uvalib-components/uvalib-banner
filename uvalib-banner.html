@@ -47,26 +47,41 @@ Library web banner
         max-width: 1044px;
         margin-left: auto;
         margin-right: auto;
+        color: var(--color-white);
       }
 
       .text-container .textTitle {
         @apply(--font-display3);
         font-weight: 900;
+        text-align: left;
         color: var(--color-white);
       }
       .text-container .text {
-        font-size: 21px;
-        font-family: sofia-pro,Helvetica Neue,sans-serif;
+        @apply(--font-display1);
         padding-top: 40px;
-        color: #fff;
         text-align: left;
+        color: var(--color-white);
+      }
+      .text-container .subText {
+        @apply(--font-headline);
+        padding-top: 30px;
+        text-align: left;
+        color: var(--color-white);
+      }
+      .text-container .subsubText {
+        @apply(--font-title);
+        padding-top: 0;
+        text-align: left;
+        color: var(--color-white);
       }
 
       uvalib-button {
         display: block;
-        color: white;
+        color: var(--color-white);
         --uvalib-button-bkgrd-color: var(--color-primary-blue);
         padding-top: 25px;
+        --uvalib-button-font-weight: bold;
+        font-size: 30px;
       }
 
       /* large */
@@ -112,6 +127,8 @@ Library web banner
             <div class="text-container">
               <div class="textTitle">{{item.textTitle}}</div>
               <div class="text">{{item.text}}</div>
+              <div class="subText">{{item.textSubtext}}</div>
+              <div class="subsubText">{{item.textSubSubtext}}</div>
               <uvalib-button raised href="{{item.link}}">{{item.buttonText}}</uvalib-button>
             </div>
           </div>

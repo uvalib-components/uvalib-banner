@@ -46,6 +46,7 @@ Library web banner
         max-width: 1044px;
         margin-left: auto;
         margin-right: auto;
+        background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url(//uvalib.github.io/web-banners/media/diwali.jpg) no-repeat 50% fixed;
       }
 
       .text-container .text {
@@ -104,7 +105,7 @@ Library web banner
     <iron-pages id="" selected="{{_randomBanner(banners)}}">
       <template is="dom-repeat" items="{{banners.banners}}">
         <template is="dom-if" if="{{item.image}}">
-          <div class="container" style="background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url({{item.image}}) no-repeat 50% fixed;">
+          <div class="container" style="">
             <div class="text-container">
               <div class="text">{{item.text}}</div>
               <uvalib-button raised href="{{item.link}}">{{item.buttonText}}</uvalib-button>

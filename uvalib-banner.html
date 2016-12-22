@@ -1,16 +1,12 @@
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-ajax/iron-ajax.html">
+<!--<link rel="import" href="../iron-ajax/iron-ajax.html">-->
 <link rel="import" href="../iron-image/iron-image.html">
 <link rel="import" href="../iron-pages/iron-pages.html">
 <link rel="import" href="../app-layout/app-scroll-effects/effects/parallax-background.html">
 <link rel="import" href="../app-layout/app-box/app-box.html">
 <link rel="import" href="../uvalib-button/uvalib-button.html">
 <link rel="import" href="../uvalib-theme/uvalib-theme.html">
-<!--
-<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../uvalib-theme/uvalib-theme.html">
-
--->
+<link rel="import" href="../uvalib-models/uvalib-models.html">
 
 <!--
 `uvalib-banner`
@@ -40,7 +36,9 @@ Library web banner
         width: auto;
         background-color: #f3f3f3;
         background-size: cover !important;
-        background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url(//uvalib.github.io/web-banners/media/diwali.jpg) no-repeat 50% fixed;
+        /*
+        background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url(//uvalib.github.io/web-banners/media/annespencer/annespencer.png) no-repeat 50% fixed;
+        */
       }
 
       .text-container {
@@ -58,7 +56,7 @@ Library web banner
       }
       .text-container .text {
         @apply(--font-display1);
-        padding-top: 40px;
+        padding-top: 20px;
         text-align: left;
         color: var(--color-white);
       }
@@ -84,77 +82,47 @@ Library web banner
         font-size: 30px;
       }
 
-      /* large */
-      @media (min-width: 1100px) {
-        .text-container {
-          padding: 70px 30px;
-        }
-      }
       /* desktop */
       @media (min-width: 993px) {
         .text-container {
-          padding: 70px 30px;
+          padding: 50px 30px;
+          max-width: 400px;
+          margin-left: inherit;
+          margin-right: inherit;
         }
       }
       /* tablet */
       @media (min-width: 601px) and (max-width: 992px) {
         .text-container {
-          padding: 70px 30px;
+          padding: 50px 30px;
+          max-width: 60%;
         }
         .text-container .text {
-          line-height: 26px;
+          line-height: 30px;
         }
       }
       /* mobile */
       @media (max-width: 600px) {
         .text-container {
-          padding: 100px 25px;
+          padding: 50px 25px;
+          max-width: 85%;
         }
         .text-container .text {
-          line-height: 28px;
+          line-height: 30px;
         }
       }
 
     </style>
 
-    <iron-ajax auto url="https://uvalib.github.io/web-banners/banners.json" handle-as="json" last-response="{{banners}}"></iron-ajax>
-    <!--<iron-ajax auto url="./banner.json" handle-as="json" last-response="{{banners}}"></iron-ajax>-->
+    <uvalib-model-banners random="{{banner}}"></uvalib-model-banners>
 
-    <iron-pages id="" selected="{{_randomBanner(banners)}}">
-      <template is="dom-repeat" items="{{banners.banners}}">
-        <template is="dom-if" if="{{item.image}}">
-          <div class="container" style="">
-            <div class="text-container">
-              <div class="textTitle">{{item.textTitle}}</div>
-              <div class="text">{{item.text}}</div>
-              <div class="subText">{{item.textSubtext}}</div>
-              <div class="subsubText">{{item.textSubSubtext}}</div>
-              <uvalib-button raised href="{{item.link}}">{{item.buttonText}}</uvalib-button>
-            </div>
-          </div>
-        </template>
-        <template is="dom-if" if="{{!item.image}}">
-          <a href="{{item.link}}">
-            </tempalte>
-            <template is="dom-if" if="{{smallScreen}}">
-              <iron-image width="100%" preload fade
-              alt="{{item.altText}}"
-              src="{{item.smallImage}}"></iron-image>
-            </template>
-            <template is="dom-if" if="{{mediumScreen}}">
-              <iron-image width="100%" preload fade
-              alt="{{item.altText}}"
-              src="{{item.mediumImage}}"></iron-image>
-            </template>
-            <template is="dom-if" if="{{largeScreen}}">
-              <iron-image width="100%" preload fade
-              alt="{{item.altText}}"
-              src="{{item.largeImage}}"></iron-image>
-            </template>
-          </a>
-        </template>
-      </template>
-    </iron-pages>
+    <div class="container" style="{{_containerStyle(banner,largeScreen,mediumScreen,smallScreen)}}" hidden="{{!banner}}">
+      <div class="text-container">
+        <div class="textTitle">{{banner.title}}</div>
+        <div class="text" inner-h-t-m-l="{{banner.body}}"></div>
+      </div>
+    </div>
+
 
   </template>
 
@@ -168,15 +136,22 @@ Library web banner
           type: Boolean,
           value: true
         },
+        banner: {
+          type: Object,
+          value: null
+        }
       },
-      _isTextBox: function(item){
-        return (item.title || item.description || item.action);
-      },
-      _randomBanner: function(){
-        var numBanners = (this.banners)? this.banners.banners.length:0;
-        if (numBanners <= 1) return 0;
-        else {
-          return Math.round(Math.random()*(numBanners-1));
+      _containerStyle: function(){
+        if (this.banner) {
+          if (this.largeScreen)
+            return "background: url("+this.banner.desktopImage.url+") no-repeat top left;";
+          else if (this.mediumScreen)
+            return "background: url("+this.banner.tabletImage.url+") no-repeat center center;";
+          else {
+            return "background: url("+this.banner.phoneImage.url+") no-repeat center center;";
+          }
+        } else {
+          return "";
         }
       }
     });

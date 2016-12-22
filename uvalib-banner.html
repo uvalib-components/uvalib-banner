@@ -118,7 +118,7 @@ Library web banner
 
     <uvalib-model-banners random="{{banner}}"></uvalib-model-banners>
 
-    <div class="container" style="{{_containerStyle(banner,largeScreen,mediumScreen,smallScreen)}}" hidden="{{!banner}}">
+    <div class="container" style$="{{_containerStyle(banner,largeScreen,mediumScreen,smallScreen)}}" hidden="{{!banner}}">
       <div class="text-container">
         <div class="textTitle">{{banner.title}}</div>
         <div class="text" inner-h-t-m-l="{{banner.body}}"></div>

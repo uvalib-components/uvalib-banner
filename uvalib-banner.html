@@ -124,11 +124,10 @@ Library web banner
 
     <div class="container" clickable="{{_clickable(banner)}}" style$="{{_containerStyle(banner,largeScreen,mediumScreen,smallScreen)}}" hidden="{{!banner}}" on-tap="_tapbanner">
       <div class="text-container">
-        <div class="textTitle">{{banner.title}}</div>
-        <div class="text" inner-h-t-m-l="{{banner.body}}"></div>
+        <div class="textTitle" hidden="{{!banner.displayTitle}}">{{banner.title}}</div>
+        <div class="text" inner-h-t-m-l="{{banner.body}}" hidden="{{!banner.body}}"></div>
       </div>
     </div>
-
 
   </template>
 

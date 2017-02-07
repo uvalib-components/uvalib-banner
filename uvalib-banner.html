@@ -1,9 +1,11 @@
 <link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../iron-image/iron-image.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-fab/paper-fab.html">
 <link rel="import" href="../uvalib-button/uvalib-button.html">
 <link rel="import" href="../uvalib-theme/uvalib-theme.html">
 <link rel="import" href="../uvalib-models/uvalib-models.html">
+<link rel="import" href="../uvalib-helper-libs/uvalib-html-echo.html">
 <link rel="import" href="../uvalib-helper-libs/uvalib-helper-behaviors.html">
 <link rel="import" href="../neon-animation/neon-animated-pages.html">
 <link rel="import" href="../neon-animation/neon-animatable.html">
@@ -19,14 +21,22 @@ Library web banner
 <dom-module id="uvalib-banner">
   <template>
     <style is="custom-style" include="uvalib-theme">
-
-      /* Style for the uvalib-banner host element */
       :host {
         display: block;
         @apply(--layout-vertical);
       }
+      iron-image {
+        width: 100%;
+        --iron-image-width: 100%;
+        --iron-image-placeholder: {
+          background-size: cover;
+        }
+      }
 
-      /* helper container to style the banner as a whole */
+      [clickable] {
+        cursor: pointer;
+      }
+
       .container {
         position: relative;
         overflow: hidden;
@@ -34,117 +44,103 @@ Library web banner
         background-color: #f3f3f3;
         background-size: cover !important;
       }
-      [clickable] {
-        cursor: pointer;
-      }
-      .container[smallscreen] {
-        height: 291px;
-      }
-      .container[medscreen] {
-        height: 330.4px;
-      }
-      .container[largescreen] {
-        height: 550px;
-      }
 
-      /* container that acts as a shade when needed */
-      .shade[on] {
-        background-image: linear-gradient(to top, rgba(0, 126, 237, 0), rgba(0, 0, 0, 0.66));
-      }
-
-      /* container for text and button */
       .text-container {
+        max-width: 1044px;
+        margin-left: auto;
+        margin-right: auto;
         color: var(--color-white);
       }
-      [smallscreen] .text-container {
-          width: 313px;
-          margin-left: 16px;
-          margin-top: 34px;
-      }
-      [medscreen] .text-container {
-          width: 544px;
-          margin-left: 109px;
-          margin-top: 71px;
-      }
-      [largescreen] .text-container {
-          width: 714.3px;
-          margin-left: 130px;
-          margin-top: 113px;
-      }
 
-      /* container for the title */
       .text-container .textTitle {
+        @apply(--font-display3);
+        font-weight: 900;
         text-align: left;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        letter-spacing: normal;
         color: var(--color-white);
       }
-      [smallscreen] .text-container .textTitle {
-        font-family: LeituraNews-Roman3;
-        font-size: 24px;
-        line-height: 1.25;
-        margin-bottom: 8px;
-      }
-      [medscreen] .text-container .textTitle {
-        font-family: LeituraNews-Roman2;
-        font-size: 34px;
-        line-height: 1.18;
-        margin-bottom: 9px;
-      }
-      [largescreen] .text-container .textTitle {
-        font-family: LeituraNews-Roman3;
-        font-size: 45px;
-        line-height: 1.07;
-        margin-bottom: 18px;
-      }
-
-      /* container for the body text */
       .text-container .text {
+        @apply(--font-display1);
+        text-align: left;
         color: var(--color-white);
-        font-family: SofiaPro;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        letter-spacing: normal;
       }
-      [smallscreen] .text-container .text {
-        font-size: 14px;
-        line-height: 1;
-        margin-bottom: 16px;
+      .text-container .subText {
+        @apply(--font-headline);
+        padding-top: 30px;
+        text-align: left;
+        color: var(--color-white);
       }
-      [medscreen] .text-container .text {
-        font-size: 16px;
-        line-height: 1.5;
-        margin-bottom: 12px;
-      }
-      [largescreen] .text-container .text {
-        font-size: 24px;
-        line-height: 1.33;
-        margin-bottom: 20px;
+      .text-container .subsubText {
+        @apply(--font-title);
+        padding-top: 0;
+        text-align: left;
+        color: var(--color-white);
       }
 
-      /* container for the button */
       uvalib-button {
         display: block;
         color: var(--color-white);
-        --uvalib-button-bkgrd-color: var(--uvalib-blue-700);
+        --uvalib-button-bkgrd-color: var(--color-primary-blue);
+        padding-top: 25px;
         --uvalib-button-font-weight: bold;
         font-size: 30px;
+      }
+
+      /* mobile */
+      .container[smallscreen] {
+        height: 291px;
+      }
+      [smallscreen] .text-container {
+          padding: 50px 25px;
+          max-width: 85%;
+        }
+      [smallscreen] .text-container .text {
+          line-height: 30px;
+      }
+
+      /* desktop */
+      .container[largescreen] {
+        height: 550px;
+      }
+      [largescreen] .text-container {
+          padding: 50px 30px;
+          max-width: 400px;
+          margin-left: inherit;
+          margin-right: inherit;
+      }
+      [largescreen] .text-container .text {
+          line-height: 32px;
+      }
+
+      /* tablet */
+      .container[medscreen] {
+        height: 330.4px;
+      }
+      [medscreen] .text-container {
+          padding: 50px 30px;
+          max-width: 60%;
+      }
+      [medscreen] .text-container .text {
+          line-height: 30px;
+      }
+
+      .text {
+        --html-echo: {
+          display: none;
+        }
+        display: none;
       }
 
     </style>
 
     <div id="container" class="container" smallscreen$="{{!_or(mediumScreen,largeScreen)}}" medscreen$="{{mediumScreen}}" largescreen$="{{largeScreen}}" clickable$="{{_clickable(bannerLink)}}" on-tap="_tapbanner">
-      <div class="shade" on$="{{_isShady(mediumScreen,largeScreen,shadyMobile,shadyTablet,shadyDesktop)}}">
-        <div class="text-container">
-          <div class="textTitle" hidden="{{!displayTitle}}">{{bannerTitle}}</div>
-          <div class="text" hidden="{{!bannerBody}}" inner-h-t-m-l="{{bannerBody}}"></div>
-          <template is="dom-if" if="{{buttonText}}">
-            <uvalib-button href="{{bannerLink}}">{{buttonText}} </uvalib-button>
-          </template>
+      <div class="text-container">
+        <div class="textTitle" hidden="{{!displayTitle}}">{{bannerTitle}}</div>
+        <div class="text" hidden="{{!bannerBody}}">
+          <uvalib-html-echo html="{{bannerBody}}"></uvalib-html-echo>
         </div>
+        <template is="dom-if" if="{{buttonText}}">
+          <uvalib-button href="{{bannerLink}}">{{buttonText}} </uvalib-button>
+        </template>
       </div>
     </div>
 
@@ -166,10 +162,6 @@ Library web banner
           type: String,
           value: null
         },
-        shadyMobile: Boolean,
-        shadyTablet: Boolean,
-        shadyDesktop: Boolean,
-        shady: Boolean,
         mediumScreen: {
           type: Boolean,
           value: false
@@ -210,13 +202,6 @@ Library web banner
             this.updateStyles();
           }
         }, 100);
-      },
-      _isShady: function(){
-        return this.largeScreen?  // is the screen large?
-                  this.shadyDesktop:  // then return the value of shadyDesktop
-                  this.mediumScreen?  // else if the screen is medium
-                      this.shadyTablet:  // return the value of shadyTablet
-                      this.shadyMobile;  // else the screen is small, return the value of shadyMobile
       }
     });
   </script>
@@ -232,109 +217,64 @@ Library web banners display
 <dom-module id="uvalib-banners">
   <template>
     <style is="custom-style" include="uvalib-theme">
-      /* Style for the uvalib-banner host element */
       :host {
         display: block;
         @apply(--layout-vertical);
       }
-
-      /* helper container to style the banners carousel as a whole */
       .container {
         @apply(--layout-relative);
         overflow: hidden;
       }
-      .container[smallscreen] {
-        height: 291px;
-      }
-      .container[medscreen] {
-        height: 330.4px;
-      }
-      .container[largescreen] {
-        height: 550px;
-      }
-
       #overlay {
         @apply(--layout-fit);
         @apply(--layout-horizontal);
-        /*@apply(--layout-center);*/
+        @apply(--layout-center);
         z-index: 100;
       }
       .padding {
         @apply(--layout-flex);
-        @apply(--layout-horizontal);
-        @apply(--layout-end);
+      }
+
+      /* mobile */
+      .container[smallscreen] {
+        height: 291px;
+      }
+
+      /* desktop */
+      .container[largescreen] {
+        height: 550px;
+      }
+
+      /* tablet */
+      .container[medscreen] {
+        height: 330.4px;
       }
 
       paper-fab {
-        @apply(--layout-self-center);
-        margin: 36px;
-        --paper-fab-background: rgba(0, 0, 0, 0.44);
-      }
-      [medscreen] paper-fab {
         margin: 16px;
+        --paper-fab-background: rgba(0, 0, 0, 0.44);
       }
       [smallscreen] paper-fab {
         display: none;
-      }
-
-      .bannernav {
-        line-height: normal;
-        margin: 0;
-        list-style-type: none;
-        padding: 0;
-        @apply(--layout-flex);
-        @apply(--layout-horizontal);
-        @apply(--layout-center-justified);
-      }
-      .bannernav button {
-        padding: 0;
-        background-color: rgba(0, 0, 0, 0.4);
-        border: solid 1px rgba(0, 0, 0, 0.4);
-        border-radius: 50%;
-        cursor: pointer;
-      }
-      .bannernav button[current] {
-        cursor: inherit;
-        background-color: var(--color-white);
-      }
-      [smallscreen] .bannernav button {
-        height: 9px;
-        width: 9px;
-        margin: 0 7px 10px 7px;
-      }
-      [medscreen] .bannernav button {
-        height: 11px;
-        width: 11px;
-        margin: 0 7px 13.4px 7px;
-      }
-      [largescreen] .bannernav button {
-        height: 16px;
-        width: 16px;
-        margin: 0 7px 74px 7px;
       }
     </style>
 
     <uvalib-model-banners data="{{banners}}"></uvalib-model-banners>
 
-    <div class="container" role="region" aria-label="Recent news" smallscreen$="{{!_or(mediumScreen,largeScreen)}}" medscreen$="{{mediumScreen}}" largescreen$="{{largeScreen}}">
+    <div class="container" smallscreen$="{{!_or(mediumScreen,largeScreen)}}" medscreen$="{{mediumScreen}}" largescreen$="{{largeScreen}}">
 
       <div id="overlay">
-        <paper-fab mini$="{{mediumScreen}}" icon="angle-left" id="previous-arrow" on-tap="previous" aria-label="previous banner"></paper-fab>
+        <paper-fab mini icon="angle-left" id="previous-arrow" on-tap="previous"></paper-fab>
         <div class="padding">
           <ul class="bannernav">
             <template is="dom-repeat" items="{{banners}}">
               <li>
-                <button current$="{{_equals(index,selected)}}" index$="{{index}}" on-tap="_navigateBanner">
-                  <span class="visuallyhidden">{{banner.title}}</span>
-                  <template is="dom-if" if="{{_equals(index,selected)}}">
-                    <span class="visuallyhidden">(Current Slide)</span>
-                  </template>
-                </button>
+                <button current$="{{_equals(index,selected)}}"></button>
               </li>
             </template>
           </ul>
         </div>
-        <paper-fab mini$="{{mediumScreen}}" icon="angle-right" id="next-arrow" on-tap="next" aria-label="next banner"></paper-fab>
+        <paper-fab mini icon="angle-right" id="next-arrow" on-tap="next"></paper-fab>
       </div>
 
       <neon-animated-pages id="banners" selected="[[selected]]" entry-animation="[[_entryAnimation]]" exit-animation="[[_exitAnimation]]">
@@ -393,15 +333,6 @@ Library web banners display
         this._entryAnimation = 'slide-from-left-animation';
         this._exitAnimation = 'slide-right-animation';
         this.selected = this.selected === 0 ? this.banners.length-1 : (this.selected - 1);
-      },
-      _navigateBanner: function(e){
-        var target = e.target;
-        if (!target.hasAttribute('current')) {
-          this.selected = parseInt(target.getAttribute('index'));
-          var selBanner = this.$.banners.selectedItem.querySelector('uvalib-banner');
-          selBanner.setAttribute('tabindex','-1');
-          selBanner.focus();
-        }
       }
     });
   </script>

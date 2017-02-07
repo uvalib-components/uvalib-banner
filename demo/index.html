@@ -9,7 +9,6 @@
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
     <link rel="import" href="../../iron-media-query/iron-media-query.html">
-    <link rel="import" href="../../uva-brand-style/uva-layout-behavior.html">
 
     <link rel="import" href="../uvalib-banner.html">
 
@@ -25,17 +24,12 @@
   </head>
   <body unresolved>
     <template is="dom-bind" id="app">
-      <iron-media-query query="{{mediumScreenQuery}}" query-matches="{{mediumScreen}}"></iron-media-query>
-      <iron-media-query query="{{largeScreenQuery}}" query-matches="{{largeScreen}}"></iron-media-query>
+      <iron-media-query query="(max-width: 600px)" query-matches="{{smallScreen}}"></iron-media-query>
+      <iron-media-query query="(min-width: 600px) and (max-width: 992px)" query-matches="{{mediumScreen}}"></iron-media-query>
+      <iron-media-query query="(min-width: 993px)" query-matches="{{largeScreen}}"></iron-media-query>
 
-      <uvalib-banners large-screen$="{{largeScreen}}" medium-screen$="{{mediumScreen}}"></uvalib-banners>
+      <uvalib-banner small-screen="{{smallScreen}}" medium-screen="{{mediumScreen}}" large-screen="{{largeScreen}}"></uvalib-banner>
       <div style="height:5000px"></div>
     </template>
-
-    <script>
-      var scope = document.querySelector('template[is="dom-bind"]');
-      scope.mediumScreenQuery = uvabehaviors.layout.properties.mediumScreenQuery.value;
-      scope.largeScreenQuery = uvabehaviors.layout.properties.largeScreenQuery.value;
-    </script>
   </body>
 </html>

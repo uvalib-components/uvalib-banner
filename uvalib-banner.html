@@ -132,7 +132,7 @@ Library web banner
 
     </style>
 
-    <div id="container" class="container" smallscreen$="{{!_or(mediumScreen,largeScreen)}}" medscreen$="{{mediumScreen}}" largescreen$="{{largeScreen}}" clickable$="{{_clickable(bannerLink)}}" on-tap="_tapbanner">
+    <div class="container" smallscreen$="{{!_or(mediumScreen,largeScreen)}}" medscreen$="{{mediumScreen}}" largescreen$="{{largeScreen}}" clickable$="{{_clickable(bannerLink)}}" style$="{{_containerStyle(desktopImage,tabletImage,phoneImage,largeScreen,mediumScreen)}}" on-tap="_tapbanner">
       <div class="text-container">
         <div class="textTitle" hidden="{{!displayTitle}}">{{bannerTitle}}</div>
         <div class="text" hidden="{{!bannerBody}}">
@@ -171,9 +171,6 @@ Library web banner
           value: false
         }
       },
-      observers: [
-        '_containerStyle(largeScreen,mediumScreen,desktopImage,tabletImage,phoneImage)'
-      ],
       _clickable: function(){
         if (this.bannerLink) {
           return true;
@@ -186,19 +183,13 @@ Library web banner
         }
       },
       _containerStyle: function(){
-        this.debounce('rebackground', function(){
-          if (this.largeScreen) {
-            Polymer.dom(this.$.container).setAttribute("style", "background: url("+this.desktopImage+") no-repeat top left;");
-            this.updateStyles();
-          } else if (this.mediumScreen) {
-            Polymer.dom(this.$.container).setAttribute("style", "background: url("+this.tabletImage+") no-repeat center center;");
-            this.updateStyles();
-          } else {
-            console.log('mobile style');
-            Polymer.dom(this.$.container).setAttribute("style", "background: url("+this.phoneImage+") no-repeat center center;");
-            this.updateStyles();
+          if (this.largeScreen)
+            return "background: url("+this.desktopImage+") no-repeat top left;";
+          else if (this.mediumScreen)
+            return "background: url("+this.tabletImage+") no-repeat center center;";
+          else {
+            return "background: url("+this.phoneImage+") no-repeat center center;";
           }
-        }, 100);
       }
     });
   </script>
@@ -287,7 +278,8 @@ Library web banners display
                            display-title="{{banner.displayTitle}}"
                            banner-title="{{banner.title}}"
                            banner-body="{{banner.body}}"
-                           button-text="{{banner.buttonText}}"></uvalib-banner>
+                           button-text="{{banner.buttonText}}"
+                           hidden="{{!banner}}"></uvalib-banner>
           </neon-animatable>
         </template>
 

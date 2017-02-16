@@ -36,3 +36,20 @@ $ polymer test
 ```
 
 Your application is already set up to be tested via [web-component-tester](https://github.com/Polymer/web-component-tester). Run `polymer test` to run your application's test suite locally.
+
+
+## Making banner images
+
+[A minimally-technical guide to making banner images can be found in Confluence.](https://confluence.lib.virginia.edu/display/UX/Web+Banner+Specifications)
+
+
+
+
+
+
+
+
+
+
+
+

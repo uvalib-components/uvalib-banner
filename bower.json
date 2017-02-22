@@ -3,6 +3,7 @@
   "description": "Library web banner",
   "main": "uvalib-banner.html",
   "dependencies": {
-    "uvalib-elements": "uvalib-components/uvalib-elements#latest"
+    "uvalib-elements": "uvalib-components/uvalib-elements#latest",
+    "iron-swipeable-pages": "MeTaNoV/iron-swipeable-pages#^1.2.6"
   }
 }

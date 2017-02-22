@@ -1,4 +1,5 @@
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../iron-swipeable-pages/iron-swipeable-pages.html">
 <link rel="import" href="../paper-fab/paper-fab.html">
 <link rel="import" href="../uvalib-button/uvalib-button.html">
 <link rel="import" href="../uvalib-theme/uvalib-theme.html">
@@ -254,36 +255,46 @@ Library web banners display
         height: 550px;
       }
 
-      #overlay {
-        @apply(--layout-fit);
-        @apply(--layout-horizontal);
-        /*@apply(--layout-center);*/
-        z-index: 100;
-      }
-      .padding {
-        @apply(--layout-flex);
-        @apply(--layout-horizontal);
-        @apply(--layout-end);
-      }
-
       paper-fab {
-        @apply(--layout-self-center);
-        margin: 36px;
+        position: absolute;
+        top: 247px;
+        z-index: 1000
         --paper-fab-background: rgba(0, 0, 0, 0.44);
-      }
-      [medscreen] paper-fab {
-        margin: 16px;
       }
       [smallscreen] paper-fab {
         display: none;
       }
+      [medscreen] paper-fab {
+        top: 137px;
+      }
+      [largescreen] paper-fab {
+        top: 247px;
+      }
+      paper-fab#previous-arrow {
+        left: 36px;
+      }
+      paper-fab#next-arrow {
+        right: 36px;
+      }
 
+      [smallscreen] .bannernav {
+        top: 252px;
+      }
+      [medscreen] .bannernav {
+        top: 296px;
+      }
+      [largescreen] .bannernav {
+        top: 425px;
+      }
       .bannernav {
+        z-index: 1000;
+        left: 0;
+        right: 0;
+        position: absolute;
         line-height: normal;
         margin: 0;
         list-style-type: none;
         padding: 0;
-        @apply(--layout-flex);
         @apply(--layout-horizontal);
         @apply(--layout-center-justified);
       }
@@ -313,12 +324,17 @@ Library web banners display
         width: 16px;
         margin: 0 7px 95px 7px;
       }
+
+
+      iron-swipeable-pages {
+        height: 100%;
+      }
     </style>
 
     <uvalib-model-banners data="{{banners}}"></uvalib-model-banners>
 
     <div class="container" role="region" aria-label="Recent news" smallscreen$="{{!_or(mediumScreen,largeScreen)}}" medscreen$="{{mediumScreen}}" largescreen$="{{largeScreen}}">
-
+<!--
       <div id="overlay">
         <paper-fab mini$="{{mediumScreen}}" icon="angle-left" id="previous-arrow" on-tap="previous" aria-label="previous banner"></paper-fab>
         <div class="padding">
@@ -337,7 +353,41 @@ Library web banners display
         </div>
         <paper-fab mini$="{{mediumScreen}}" icon="angle-right" id="next-arrow" on-tap="next" aria-label="next banner"></paper-fab>
       </div>
+-->
+<paper-fab mini$="{{mediumScreen}}" icon="angle-left" id="previous-arrow" on-tap="previous" aria-label="previous banner"></paper-fab>
+<paper-fab mini$="{{mediumScreen}}" icon="angle-right" id="next-arrow" on-tap="next" aria-label="next banner"></paper-fab>
+<ul class="bannernav">
+  <template is="dom-repeat" items="{{banners}}">
+    <li>
+      <button current$="{{_equals(index,selected)}}" index$="{{index}}" on-tap="_navigateBanner">
+        <span class="screen-reader-text">{{banner.title}}</span>
+        <template is="dom-if" if="{{_equals(index,selected)}}">
+          <span class="screen-reader-text">(Current Slide)</span>
+        </template>
+      </button>
+    </li>
+  </template>
+</ul>
 
+<iron-swipeable-pages selected="{{selected}}">
+        <template is="dom-repeat" items="{{banners}}" as="banner">
+            <uvalib-banner large-screen="{{largeScreen}}"
+                           medium-screen="{{mediumScreen}}"
+                           banner-link="{{banner.link}}"
+                           phone-image="{{banner.phoneImage.url}}"
+                           tablet-image="{{banner.tabletImage.url}}"
+                           desktop-image="{{banner.desktopImage.url}}"
+                           display-title="{{banner.displayTitle}}"
+                           banner-title="{{banner.title}}"
+                           banner-body="{{banner.body}}"
+                           button-text="{{banner.buttonText}}"
+                           shady-mobile="{{banner.shadyMobile}}"
+                           shady-tablet="{{banner.shadyTablet}}"
+                           shady-desktop="{{banner.shadyDesktop}}"></uvalib-banner>
+
+        </template>
+</iron-swipeable-pages>
+<!--
       <neon-animated-pages id="banners" selected="[[selected]]" entry-animation="[[_entryAnimation]]" exit-animation="[[_exitAnimation]]">
 
         <template is="dom-repeat" items="{{banners}}" as="banner">
@@ -359,6 +409,7 @@ Library web banners display
         </template>
 
       </neon-animated-pages>
+-->
 
     </div>
 

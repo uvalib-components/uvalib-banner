@@ -198,7 +198,6 @@ Library web banners display
         var target = e.target;
         if (!target.hasAttribute('current')) {
           this.selected = parseInt(target.getAttribute('index'));
-//          var selBanner = this.$.banners.selectedItem.querySelector('uvalib-banner');
           var selBanner = this.querySelector('.iron-selected');
           selBanner.setAttribute('tabindex','-1');
           selBanner.focus();

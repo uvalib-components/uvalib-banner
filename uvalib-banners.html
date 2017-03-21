@@ -136,7 +136,7 @@ Library web banners display
         </template>
       </ul>
 
-      <iron-swipeable-pages selected="{{selected}}">
+      <iron-swipeable-pages id="banners" selected="{{selected}}">
         <template is="dom-repeat" items="{{banners}}" as="banner">
             <uvalib-banner large-screen="{{largeScreen}}"
                            medium-screen="{{mediumScreen}}"
@@ -151,7 +151,6 @@ Library web banners display
                            shady-mobile="{{banner.shadyMobile}}"
                            shady-tablet="{{banner.shadyTablet}}"
                            shady-desktop="{{banner.shadyDesktop}}"></uvalib-banner>
-
         </template>
       </iron-swipeable-pages>
 
@@ -198,7 +197,7 @@ Library web banners display
         var target = e.target;
         if (!target.hasAttribute('current')) {
           this.selected = parseInt(target.getAttribute('index'));
-          var selBanner = this.querySelector('.iron-selected');
+          var selBanner = this.$.banners.querySelector('.iron-selected');
           selBanner.setAttribute('tabindex','-1');
           selBanner.focus();
         }

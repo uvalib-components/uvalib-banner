@@ -132,13 +132,14 @@ Library web banner
 
     </style>
 
-    <div id="container" class="container" smallscreen$="{{!_or(mediumScreen,largeScreen)}}" medscreen$="{{mediumScreen}}" largescreen$="{{largeScreen}}" clickable$="{{_clickable(bannerLink)}}" on-tap="_tapbanner">
-      <div class="shade" on$="{{_isShady(mediumScreen,largeScreen,shadyMobile,shadyTablet,shadyDesktop)}}">
+    <div id="container" class="container" smallscreen$="[[!_or(mediumScreen,largeScreen)]]"
+      medscreen$="[[mediumScreen]]" largescreen$="[[largeScreen]]" clickable$="[[_clickable(bannerLink)]]" on-tap="_tapbanner">
+      <div class="shade" on$="[[_isShady(mediumScreen,largeScreen,shadyMobile,shadyTablet,shadyDesktop)]]">
         <div class="text-container">
-          <div class="textTitle" hidden="{{!displayTitle}}">{{bannerTitle}}</div>
-          <div class="text" hidden="{{!bannerBody}}" inner-h-t-m-l="{{bannerBody}}"></div>
-          <template is="dom-if" if="{{buttonText}}">
-            <uvalib-button href="{{bannerLink}}">{{buttonText}} </uvalib-button>
+          <div class="textTitle" hidden="[[!displayTitle]]">[[bannerTitle]]</div>
+          <div class="text" hidden="[[!bannerBody]]" inner-h-t-m-l="[[bannerBody]]"></div>
+          <template is="dom-if" if="[[buttonText]]">
+            <uvalib-button href="[[bannerLink]]">[[buttonText]]</uvalib-button>
           </template>
         </div>
       </div>

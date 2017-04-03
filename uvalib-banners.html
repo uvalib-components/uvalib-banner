@@ -117,7 +117,7 @@ Library web banners display
       }
     </style>
 
-    <uvalib-model-banners data="{{banners}}"></uvalib-model-banners>
+    <uvalib-model-banners data="{{_bannersBuffer}}"></uvalib-model-banners>
 
     <div class="container" role="region" aria-label="Recent news"
       smallscreen$="[[!_or(mediumScreen,largeScreen)]]" medscreen$="[[mediumScreen]]" largescreen$="[[largeScreen]]">
@@ -176,6 +176,11 @@ Library web banners display
           type: Boolean,
           value: false
         },
+        _bannersBuffer: {
+          type: Array,
+          value: [],
+          observer: "_bannersBufferChange"
+        },
         banners: {
           type: Array,
           value: [],
@@ -205,6 +210,13 @@ Library web banners display
       },
       _bannersChange: function(){
         this.selected=0;
+      },
+      _bannersBufferChange: function(){
+        this.debounce('bannerbounce', function(){
+          if (this._bannersBuffer && this._bannersBuffer.length >= 1) {
+            this.set('banners', this._bannersBuffer);
+          }
+        }, 500);
       }
     });
   </script>

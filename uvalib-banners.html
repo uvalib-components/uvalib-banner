@@ -215,7 +215,8 @@ Library web banners display
         this.debounce('bannerbounce', function(){
           if (this._bannersBuffer && this._bannersBuffer.length >= 1) {
             this.set('banners', this._bannersBuffer);
-            this.$.banners._onResize();
+            //attempt to refresh the swiper
+            setTimeout(this.$.banners._onResize,1000);
           }
         }, 500);
       }

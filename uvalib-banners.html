@@ -122,6 +122,7 @@ Library web banners display
     <div class="container" role="region" aria-label="Recent news"
       smallscreen$="[[!_or(mediumScreen,largeScreen)]]" medscreen$="[[mediumScreen]]" largescreen$="[[largeScreen]]">
 
+<template is="dom-if" if="[[_hasLength(banners)]]">
       <paper-fab mini$="[[mediumScreen]]" icon="angle-left" id="previous-arrow" on-tap="previous" aria-label="previous banner"></paper-fab>
       <paper-fab mini$="[[mediumScreen]]" icon="angle-right" id="next-arrow" on-tap="next" aria-label="next banner"></paper-fab>
       <ul class="bannernav">
@@ -154,6 +155,7 @@ Library web banners display
                            shady-desktop="[[banner.shadyDesktop]]"></uvalib-banner>
         </template>
       </iron-swipeable-pages>
+</template>
 
     </div>
 
@@ -198,6 +200,9 @@ Library web banners display
         this._entryAnimation = 'slide-from-left-animation';
         this._exitAnimation = 'slide-right-animation';
         this.selected = this.selected === 0 ? this.banners.length-1 : (this.selected - 1);
+      },
+      _hasLength: function(arry){
+        return (arry && arry.length>0);
       },
       _navigateBanner: function(e){
         var target = e.target;

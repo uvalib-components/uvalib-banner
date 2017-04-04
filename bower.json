@@ -4,6 +4,6 @@
   "main": "uvalib-banner.html",
   "dependencies": {
     "uvalib-elements": "uvalib-components/uvalib-elements#master",
-    "iron-swipeable-pages": "^1.2.8"
+    "iron-swipeable-pages": "^1.2.6"
   }
 }

@@ -216,15 +216,16 @@ Library web banners display
       _bannersChange: function(){
 //        this.selected=2;
         this.selected = Math.round(Math.random()* this.banners.length );
+        console.log(this.selected);
       },
       _bannersBufferChange: function(){
         this.debounce('bannerbounce', function(){
           if (this._bannersBuffer && this._bannersBuffer.length >= 1) {
             this.set('banners', this._bannersBuffer);
             //attempt to refresh the swiper
-            setTimeout(this.$.banners._onResize,1000);
-            setTimeout(this.$.banners._onResize,5000);
-            setTimeout(this.$.banners._onResize,10000);
+//            setTimeout(this.$.banners._onResize,1000);
+//            setTimeout(this.$.banners._onResize,5000);
+//            setTimeout(this.$.banners._onResize,10000);
           }
         }, 500);
       }

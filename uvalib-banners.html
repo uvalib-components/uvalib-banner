@@ -45,14 +45,12 @@ Library web banners display
         position: absolute;
         top: 247px;
         z-index: 1000;
-        color: white;
-        background-color: rgba(0, 0, 0, 0.44);
-/*        --paper-fab-background: rgba(255, 255, 255, 0.44); */
-      }
-      paper-fab[dark] {
         color: black;
         background-color: rgba(255, 255, 255, 0.44);
-/*        --paper-fab-background: rgba(255, 255, 255, 0.44); */
+      }
+      paper-fab[dark] {
+        color: white;
+        background-color: rgba(0, 0, 0, 0.44);
       }
       [smallscreen] paper-fab {
         display: none;
@@ -117,8 +115,6 @@ Library web banners display
         width: 16px;
         margin: 0 7px 95px 7px;
       }
-
-
       iron-swipeable-pages {
         height: 100%;
       }
@@ -129,41 +125,41 @@ Library web banners display
     <div class="container" role="region" aria-label="Recent news"
       smallscreen$="[[!_or(mediumScreen,largeScreen)]]" medscreen$="[[mediumScreen]]" largescreen$="[[largeScreen]]">
 
-<template is="dom-if" if="[[_hasLength(banners)]]">
-      <paper-fab dark$="[[!_selectedDark(selected)]]" mini$="[[mediumScreen]]" icon="angle-left" id="previous-arrow" on-tap="previous" aria-label="previous banner"></paper-fab>
-      <paper-fab dark$="[[!_selectedDark(selected)]]" mini$="[[mediumScreen]]" icon="angle-right" id="next-arrow" on-tap="next" aria-label="next banner"></paper-fab>
-      <ul class="bannernav">
-        <template is="dom-repeat" items="[[banners]]">
-          <li>
-            <button current$="[[_equals(index,selected)]]" index$="[[index]]" on-tap="_navigateBanner">
-              <span class="screen-reader-text">[[banner.title]]</span>
-              <template is="dom-if" if="[[_equals(index,selected)]]">
-                <span class="screen-reader-text">(Current Slide)</span>
+      <template is="dom-if" if="[[_hasLength(banners)]]">
+            <paper-fab dark$="[[!_selectedDark(selected)]]" mini$="[[mediumScreen]]" icon="angle-left" id="previous-arrow" on-tap="previous" aria-label="previous banner"></paper-fab>
+            <paper-fab dark$="[[!_selectedDark(selected)]]" mini$="[[mediumScreen]]" icon="angle-right" id="next-arrow" on-tap="next" aria-label="next banner"></paper-fab>
+            <ul class="bannernav">
+              <template is="dom-repeat" items="[[banners]]">
+                <li>
+                  <button current$="[[_equals(index,selected)]]" index$="[[index]]" on-tap="_navigateBanner">
+                    <span class="screen-reader-text">[[banner.title]]</span>
+                    <template is="dom-if" if="[[_equals(index,selected)]]">
+                      <span class="screen-reader-text">(Current Slide)</span>
+                    </template>
+                  </button>
+                </li>
               </template>
-            </button>
-          </li>
-        </template>
-      </ul>
+            </ul>
 
-      <iron-swipeable-pages id="banners" selected="{{selected}}">
-        <template is="dom-repeat" items="[[banners]]" as="banner">
-            <uvalib-banner large-screen="[[largeScreen]]"
-                           medium-screen="[[mediumScreen]]"
-                           banner-link="[[banner.link]]"
-                           phone-image="[[banner.phoneImage.url]]"
-                           tablet-image="[[banner.tabletImage.url]]"
-                           desktop-image="[[banner.desktopImage.url]]"
-                           display-title="[[banner.displayTitle]]"
-                           banner-title="[[banner.title]]"
-                           banner-body="[[banner.body]]"
-                           button-text="[[banner.buttonText]]"
-                           shady-mobile="[[banner.shadyMobile]]"
-                           shady-tablet="[[banner.shadyTablet]]"
-                           tone="[[banner.tone]]"
-                           shady-desktop="[[banner.shadyDesktop]]"></uvalib-banner>
-        </template>
-      </iron-swipeable-pages>
-</template>
+            <iron-swipeable-pages carousel id="banners" selected="{{selected}}">
+              <template is="dom-repeat" items="[[banners]]" as="banner">
+                  <uvalib-banner large-screen="[[largeScreen]]"
+                                 medium-screen="[[mediumScreen]]"
+                                 banner-link="[[banner.link]]"
+                                 phone-image="[[banner.phoneImage.url]]"
+                                 tablet-image="[[banner.tabletImage.url]]"
+                                 desktop-image="[[banner.desktopImage.url]]"
+                                 display-title="[[banner.displayTitle]]"
+                                 banner-title="[[banner.title]]"
+                                 banner-body="[[banner.body]]"
+                                 button-text="[[banner.buttonText]]"
+                                 shady-mobile="[[banner.shadyMobile]]"
+                                 shady-tablet="[[banner.shadyTablet]]"
+                                 tone="[[banner.tone]]"
+                                 shady-desktop="[[banner.shadyDesktop]]"></uvalib-banner>
+              </template>
+            </iron-swipeable-pages>
+      </template>
 
     </div>
 

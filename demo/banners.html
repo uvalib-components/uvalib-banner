@@ -25,17 +25,14 @@
   </head>
   <body unresolved>
     <template is="dom-bind" id="app">
-      <iron-media-query query="{{mediumScreenQuery}}" query-matches="{{mediumScreen}}"></iron-media-query>
-      <iron-media-query query="{{largeScreenQuery}}" query-matches="{{largeScreen}}"></iron-media-query>
+      <iron-media-query query="(min-width: 600px) and (max-width: 992px)" query-matches="{{mediumScreen}}"></iron-media-query>
+      <iron-media-query query="(min-width: 993px)" query-matches="{{largeScreen}}"></iron-media-query>
 
-      <uvalib-banners large-screen$="{{largeScreen}}" medium-screen$="{{mediumScreen}}"></uvalib-banners>
-      <div style="height:5000px"></div>
+      <uvalib-banners large-screen$="[[largeScreen]]" medium-screen$="[[mediumScreen]]"></uvalib-banners>
+      <div style="height:5000px">
+        <h1>
+      </div>
     </template>
 
-    <script>
-      var scope = document.querySelector('template[is="dom-bind"]');
-      scope.mediumScreenQuery = uvabehaviors.layout.properties.mediumScreenQuery.value;
-      scope.largeScreenQuery = uvabehaviors.layout.properties.largeScreenQuery.value;
-    </script>
   </body>
 </html>

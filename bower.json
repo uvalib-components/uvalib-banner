@@ -5,5 +5,31 @@
   "dependencies": {
     "uvalib-elements": "uvalib-components/uvalib-elements#master",
     "iron-swipeable-pages": "^1.2.6"
+  },
+  "resolutions": {
+    "polymer": "^1.8.1",
+    "uvalib-elements": "master",
+    "uvalib-analytics": "master",
+    "uvalib-alerts": "master",
+    "uvalib-banner": "master",
+    "uvalib-button": "master",
+    "uvalib-events-card": "master",
+    "app-storage": "^0.10.0",
+    "iron-icons": "^1.2.1",
+    "uvalib-header": "master",
+    "uvalib-card": "master",
+    "uvalib-nav": "master",
+    "uvalib-hours-card": "master",
+    "uvalib-logos": "master",
+    "uvalib-theme": "master",
+    "uvalib-skip-nav": "master",
+    "uvalib-helper-libs": "master",
+    "uvalib-news-section": "master",
+    "uvalib-search-box": "master",
+    "uvalib-liame": "master",
+    "uvalib-models": "master",
+    "uvalib-social-links": "master",
+    "uvalib-footer": "master",
+    "lodash": "^4.17.4"
   }
 }

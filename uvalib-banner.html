@@ -28,11 +28,6 @@ Library web banner
         background-color: #f3f3f3;
         background-size: cover !important;
       }
-/*
-      [clickable] {
-        cursor: pointer;
-      }
-*/
       .container[smallscreen] {
         height: 291px;
       }
@@ -45,6 +40,9 @@ Library web banner
 
       /* container that acts as a shade when needed */
       .shade[on] {
+        position: absolute;
+        height: 100%;
+        width: 100%;
         background-image: linear-gradient(to top, rgba(0, 126, 237, 0), rgba(0, 0, 0, 0.66));
       }
 
@@ -99,6 +97,9 @@ Library web banner
       }
 
       /* container for the body text */
+      .Light .text-container .text, .Light .text-container .textTitle {
+        color: black;
+      }
       .text-container .text {
         color: var(--color-white);
         font-family: var(--font-primary);
@@ -132,16 +133,21 @@ Library web banner
         font-size: 15px;
       }
 
+      .Light uvalib-button {
+        color: black;
+        --uvalib-button-bkgrd-color: white;
+      }
+
     </style>
 
-    <div id="container" class="container" smallscreen$="[[!_or(mediumScreen,largeScreen)]]"
+    <div id="container" class$="container [[tone]]" smallscreen$="[[!_or(mediumScreen,largeScreen)]]"
       medscreen$="[[mediumScreen]]" largescreen$="[[largeScreen]]" clickable$="[[_clickable(bannerLink)]]" on-tap="_tapbanner">
       <div class="shade" on$="[[_isShady(mediumScreen,largeScreen,shadyMobile,shadyTablet,shadyDesktop)]]">
         <div class="text-container">
           <div class="textTitle" hidden="[[!displayTitle]]">[[bannerTitle]]</div>
           <div class="text" hidden="[[!bannerBody]]" inner-h-t-m-l="[[bannerBody]]"></div>
           <template is="dom-if" if="[[buttonText]]">
-            <uvalib-button href="[[bannerLink]]">[[buttonText]]</uvalib-button>
+            <uvalib-button href="[[bannerLink]]" raised$="[[_isDark(tone)]]">[[buttonText]]</uvalib-button>
           </template>
         </div>
       </div>
@@ -175,7 +181,8 @@ Library web banner
         largeScreen: {
           type: Boolean,
           value: false
-        }
+        },
+        tone: String
       },
       ready: function(){
           this._containerStyle();
@@ -188,6 +195,9 @@ Library web banner
           return true;
         }
         return false;
+      },
+      _isDark: function(tone){
+        return (tone==='Dark');
       },
       _tapbanner: function(){
 //        if (this.bannerLink) {

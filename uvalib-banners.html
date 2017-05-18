@@ -205,11 +205,13 @@ Library web banners display
         this._entryAnimation = 'slide-from-right-animation';
         this._exitAnimation = 'slide-left-animation';
         this.selected = this.selected === this.banners.length-1 ? 0 : (this.selected + 1);
+        this.fire('next');
       },
       previous: function(){
         this._entryAnimation = 'slide-from-left-animation';
         this._exitAnimation = 'slide-right-animation';
         this.selected = this.selected === 0 ? this.banners.length-1 : (this.selected - 1);
+        this.fire('previous');
       },
       _hasLength: function(arry){
         return (arry && arry.length>0);
@@ -221,6 +223,7 @@ Library web banners display
           var selBanner = this.querySelector('.iron-selected');
           selBanner.setAttribute('tabindex','-1');
           selBanner.focus();
+          this.fire('navigate');
         }
       },
       _bannersChange: function(){

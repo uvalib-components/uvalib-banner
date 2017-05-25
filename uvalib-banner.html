@@ -138,16 +138,20 @@ Library web banner
         --uvalib-button-bkgrd-color: var(--uvalib-blue-500);
       }
 
+      .text-container[narrow] {
+        max-width: 400px;
+      }
+
     </style>
 
     <div id="container" class$="container [[tone]]" smallscreen$="[[!_or(mediumScreen,largeScreen)]]"
       medscreen$="[[mediumScreen]]" largescreen$="[[largeScreen]]" clickable$="[[_clickable(bannerLink)]]" on-tap="_tapbanner">
-      <div class="shade" on$="[[_isShady(mediumScreen,largeScreen,shadyMobile,shadyTablet,shadyDesktop)]]">
-        <div class="text-container">
+      <div id="[[uuid]]" class="shade" on$="[[_isShady(mediumScreen,largeScreen,shadyMobile,shadyTablet,shadyDesktop)]]">
+        <div class="text-container" narrow$="[[narrowText]]">
           <div class="textTitle" hidden="[[!displayTitle]]">[[bannerTitle]]</div>
           <div class="text" hidden="[[!bannerBody]]" inner-h-t-m-l="[[bannerBody]]"></div>
           <template is="dom-if" if="[[buttonText]]">
-            <uvalib-button href="[[bannerLink]]" raised$="[[_isDark(tone)]]">[[buttonText]]</uvalib-button>
+            <uvalib-button on-click="_trackLink" href="[[bannerLink]]" raised$="[[_isDark(tone)]]">[[buttonText]]</uvalib-button>
           </template>
         </div>
       </div>
@@ -160,6 +164,8 @@ Library web banner
       is: 'uvalib-banner',
       behaviors: [uvalibbehaviors.helpers],
       properties: {
+        uuid: String,
+        narrowText: Boolean,
         bannerLink: String,
         desktopImage: String,
         tabletImage: String,
@@ -199,11 +205,6 @@ Library web banner
       _isDark: function(tone){
         return (tone==='Dark');
       },
-      _tapbanner: function(){
-//        if (this.bannerLink) {
-//          window.location = this.bannerLink;
-//        }
-      },
       _containerStyle: function(){
         this.debounce('rebackground', function(){
           if (this.largeScreen) {
@@ -225,6 +226,14 @@ Library web banner
                   this.mediumScreen?  // else if the screen is medium
                       this.shadyTablet:  // return the value of shadyTablet
                       this.shadyMobile;  // else the screen is small, return the value of shadyMobile
+      },
+      _trackLink: function(e){
+        e.preventDefault();
+        var link = Polymer.dom(e).localTarget.href;
+        this.fire('banner-link-click',{href:link})
+        setTimeout(function(){
+          window.location=link;
+        },500);
       }
     });
   </script>

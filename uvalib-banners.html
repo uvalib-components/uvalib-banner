@@ -141,9 +141,11 @@ Library web banners display
               </template>
             </ul>
 
-            <iron-swipeable-pages carousel id="banners" selected="{{selected}}">
+            <iron-swipeable-pages carousel id="banners" selected="{{selected}}" on-selected-changed="_changed">
               <template is="dom-repeat" items="[[banners]]" as="banner">
-                  <uvalib-banner large-screen="[[largeScreen]]"
+                  <uvalib-banner uuid="[[banner.uuid]]"
+                                 narrow-text="[[banner.narrowText]]"
+                                 large-screen="[[largeScreen]]"
                                  medium-screen="[[mediumScreen]]"
                                  banner-link="[[banner.link]]"
                                  phone-image="[[banner.phoneImage.url]]"
@@ -201,17 +203,24 @@ Library web banners display
         else
           return (!this.banners[selected].tone || this.banners[selected].tone==='Dark');
       },
+      _changed: function(note){
+        this.debounce( 'changed', function(){
+          note = (typeof note === 'string')? note:"swiped";
+          this.fire(note)
+          console.log(note);
+        },50);
+      },
       next: function(){
         this._entryAnimation = 'slide-from-right-animation';
         this._exitAnimation = 'slide-left-animation';
         this.selected = this.selected === this.banners.length-1 ? 0 : (this.selected + 1);
-        this.fire('next');
+        this._changed("next");
       },
       previous: function(){
         this._entryAnimation = 'slide-from-left-animation';
         this._exitAnimation = 'slide-right-animation';
         this.selected = this.selected === 0 ? this.banners.length-1 : (this.selected - 1);
-        this.fire('previous');
+        this._changed("previous");
       },
       _hasLength: function(arry){
         return (arry && arry.length>0);
@@ -223,11 +232,11 @@ Library web banners display
           var selBanner = this.querySelector('.iron-selected');
           selBanner.setAttribute('tabindex','-1');
           selBanner.focus();
-          this.fire('navigate');
+          this._changed("navigate");
         }
       },
       _bannersChange: function(){
-        this.selected = Math.round(Math.random()* this.banners.length );
+        this.selected = Math.round(Math.random()* (this.banners.length-1) );
         console.log(this.selected);
       },
       _bannersBufferChange: function(){

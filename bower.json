@@ -4,33 +4,5 @@
   "main": "uvalib-banner.html",
   "dependencies": {
     "uvalib-elements": "uvalib-components/uvalib-elements#master"
-  },
-  "resolutions": {
-    "uvalib-elements": "master",
-    "uvalib-images": "master",
-    "uvalib-alerts": "master",
-    "uvalib-banner": "master",
-    "uvalib-analytics": "master",
-    "uvalib-button": "master",
-    "uvalib-events-card": "master",
-    "uvalib-card": "master",
-    "uvalib-helper-libs": "master",
-    "uvalib-header": "master",
-    "uvalib-liame": "master",
-    "uvalib-hours-card": "master",
-    "uvalib-footer": "master",
-    "uvalib-logos": "master",
-    "uvalib-models": "master",
-    "uvalib-nav": "master",
-    "uvalib-news-section": "master",
-    "uvalib-search-box": "master",
-    "uvalib-social-links": "master",
-    "uvalib-theme": "master",
-    "uvalib-skip-nav": "master",
-    "app-storage": "^0.10.0",
-    "polymer": "^1.9.0",
-    "iron-icons": "^1.2.1",
-    "uva-footer": "master",
-    "lodash": "^4.17.4"
   }
 }

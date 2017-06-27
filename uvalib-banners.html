@@ -4,6 +4,7 @@
 <link rel="import" href="../uvalib-theme/uvalib-theme.html">
 <link rel="import" href="../uvalib-theme/uvalib-icons.html">
 <link rel="import" href="../uvalib-models/uvalib-model-banners.html">
+<link rel="import" href="../uvalib-models/uvalib-model-file.html">
 <link rel="import" href="../uvalib-helper-libs/uvalib-helper-behaviors.html">
 <link rel="import" href="../neon-animation/neon-animated-pages.html">
 <link rel="import" href="../neon-animation/neon-animatable.html">
@@ -143,16 +144,18 @@ Library web banners display
               </ul>
             </template>
 
-            <iron-swipeable-pages carousel id="banners" selected="{{selected}}" on-selected-changed="_changed">
+            <iron-swipeable-pages selectable="uvalib-banner" carousel id="banners" selected="{{selected}}" on-selected-changed="_changed">
               <template is="dom-repeat" items="[[banners]]" as="banner">
-                  <uvalib-banner uuid="[[banner.uuid]]"
+                  <uvalib-model-file uuid="[[_pickUUID(banner,largeScreen,mediumScreen)]]" url="{{banner.resolvedURL}}"></uvalib-model-file>
+                  <!--<template is="dom-if" if="[[banner.resolvedURL]]">-->
+                    <uvalib-banner uuid="[[banner.uuid]]"
                                  narrow-text="[[banner.narrowText]]"
                                  large-screen="[[largeScreen]]"
                                  medium-screen="[[mediumScreen]]"
                                  banner-link="[[banner.link]]"
-                                 phone-image="[[banner.phoneImage.url]]"
-                                 tablet-image="[[banner.tabletImage.url]]"
-                                 desktop-image="[[banner.desktopImage.url]]"
+                                 phone-image="[[banner.resolvedURL]]"
+                                 tablet-image="[[banner.resolvedURL]]"
+                                 desktop-image="[[banner.resolvedURL]]"
                                  display-title="[[banner.displayTitle]]"
                                  banner-title="[[banner.title]]"
                                  banner-body="[[banner.body]]"
@@ -161,6 +164,7 @@ Library web banners display
                                  shady-tablet="[[banner.shadyTablet]]"
                                  tone="[[banner.tone]]"
                                  shady-desktop="[[banner.shadyDesktop]]"></uvalib-banner>
+                  <!--</template>-->
               </template>
             </iron-swipeable-pages>
       </template>
@@ -198,6 +202,13 @@ Library web banners display
         },
         _entryAnimation: String,
         _exitAnimation: String
+      },
+      _pickUUID: function(banner){
+        return (this.largeScreen)?
+          banner.desktopImage.uuid:
+          (this.mediumScreen)?
+            banner.tabletImage.uuid:
+            banner.phoneImage.uuid;
       },
       _selectedDark: function(selected){
         if (!this.banners || !this.banners[selected] )

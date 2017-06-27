@@ -126,20 +126,22 @@ Library web banners display
       smallscreen$="[[!_or(mediumScreen,largeScreen)]]" medscreen$="[[mediumScreen]]" largescreen$="[[largeScreen]]">
 
       <template is="dom-if" if="[[_hasLength(banners)]]">
-            <paper-fab dark$="[[!_selectedDark(selected)]]" mini$="[[mediumScreen]]" icon="angle-left" id="previous-arrow" on-tap="previous" aria-label="previous banner"></paper-fab>
-            <paper-fab dark$="[[!_selectedDark(selected)]]" mini$="[[mediumScreen]]" icon="angle-right" id="next-arrow" on-tap="next" aria-label="next banner"></paper-fab>
-            <ul class="bannernav">
-              <template is="dom-repeat" items="[[banners]]">
-                <li>
-                  <button current$="[[_equals(index,selected)]]" index$="[[index]]" on-tap="_navigateBanner">
-                    <span class="screen-reader-text">[[banner.title]]</span>
-                    <template is="dom-if" if="[[_equals(index,selected)]]">
-                      <span class="screen-reader-text">(Current Slide)</span>
-                    </template>
-                  </button>
-                </li>
-              </template>
-            </ul>
+            <template is="dom-if" if="[[_isNotLonely(banners)]]">
+              <paper-fab dark$="[[!_selectedDark(selected)]]" mini$="[[mediumScreen]]" icon="angle-left" id="previous-arrow" on-tap="previous" aria-label="previous banner"></paper-fab>
+              <paper-fab dark$="[[!_selectedDark(selected)]]" mini$="[[mediumScreen]]" icon="angle-right" id="next-arrow" on-tap="next" aria-label="next banner"></paper-fab>
+              <ul class="bannernav">
+                <template is="dom-repeat" items="[[banners]]">
+                  <li>
+                    <button current$="[[_equals(index,selected)]]" index$="[[index]]" on-tap="_navigateBanner">
+                      <span class="screen-reader-text">[[banner.title]]</span>
+                      <template is="dom-if" if="[[_equals(index,selected)]]">
+                        <span class="screen-reader-text">(Current Slide)</span>
+                      </template>
+                    </button>
+                  </li>
+                </template>
+              </ul>
+            </template>
 
             <iron-swipeable-pages carousel id="banners" selected="{{selected}}" on-selected-changed="_changed">
               <template is="dom-repeat" items="[[banners]]" as="banner">
@@ -221,6 +223,9 @@ Library web banners display
         this._exitAnimation = 'slide-right-animation';
         this.selected = this.selected === 0 ? this.banners.length-1 : (this.selected - 1);
         this._changed("previous");
+      },
+      _isNotLonely: function(arry){
+        return (arry && arry.length>1);
       },
       _hasLength: function(arry){
         return (arry && arry.length>0);

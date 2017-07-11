@@ -1,6 +1,7 @@
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../uvalib-button/uvalib-button.html">
 <link rel="import" href="../uvalib-theme/uvalib-theme.html">
+<link rel="import" href="../uvalib-models/uvalib-model-file.html">
 <link rel="import" href="../uvalib-helper-libs/uvalib-helper-behaviors.html">
 
 <!--
@@ -144,6 +145,9 @@ Library web banner
 
     </style>
 
+    <template is="dom-if" if="[[_imageUUID]]">
+      <uvalib-model-file uuid="[[_imageUUID]]" url="{{_imageURL}}"></uvalib-model-file>
+    </template>
     <div id="container" class$="container [[tone]]" smallscreen$="[[!_or(mediumScreen,largeScreen)]]"
       medscreen$="[[mediumScreen]]" largescreen$="[[largeScreen]]" clickable$="[[_clickable(bannerLink)]]" on-tap="_tapbanner">
       <div id="[[uuid]]" class="shade" on$="[[_isShady(mediumScreen,largeScreen,shadyMobile,shadyTablet,shadyDesktop)]]">
@@ -170,12 +174,19 @@ Library web banner
         desktopImage: String,
         tabletImage: String,
         phoneImage: String,
+        largeImageUuid: String,
+        mediumImageUuid: String,
+        smallImageUuid: String,
         displayTitle: Boolean,
         bannerTitle: String,
         bannerBody: String,
         buttonText: {
           type: String,
           value: null
+        },
+        shady: {
+          type:Boolean,
+          value:false
         },
         shadyMobile: {
           type:Boolean,
@@ -197,13 +208,23 @@ Library web banner
           type: Boolean,
           value: false
         },
-        tone: String
+        tone: String,
+        _imageURL: {
+          type: String,
+          value: null
+        },
+        _imageUUID: {
+          type: String,
+          computed: "_getUUID(largeImageUuid,mediumImageUuid,smallImageUuid)"
+        }
       },
       ready: function(){
           this._containerStyle();
       },
       observers: [
-        '_containerStyle(largeScreen,mediumScreen,desktopImage,tabletImage,phoneImage)'
+//        '_containerStyle(_imageURL,largeScreen,mediumScreen,desktopImage,tabletImage,phoneImage,largeImageUuid,mediumImageUuid,smallImageUuid)'
+        '_containerStyle(_imageURL,largeScreen,mediumScreen,largeImageUuid,mediumImageUuid,smallImageUuid)',
+//        '_containerStyle()'
       ],
       _clickable: function(){
         if (this.bannerLink) {
@@ -214,15 +235,26 @@ Library web banner
       _isDark: function(tone){
         return (tone==='Dark');
       },
+      _getUUID: function(){
+        var id = (this.largeScreen)? this.largeImageUuid:
+                  (this.mediumScreen)? this.mediumImageUuid:
+                      this.smallImageUuid;
+        console.log('image uuid of '+id);
+        return id;
+      },
       _containerStyle: function(){
+        console.log("image "+this._imageURL);
         this.debounce('rebackground', function(){
-          if (this.largeScreen) {
+          if (this._imageURL) {
+            Polymer.dom(this.$.container).setAttribute("style", "background: url("+this._imageURL+") no-repeat top left;");
+            this.updateStyles();
+          } else if (this.largeScreen && this.desktopImage) {
             Polymer.dom(this.$.container).setAttribute("style", "background: url("+this.desktopImage+") no-repeat top left;");
             this.updateStyles();
-          } else if (this.mediumScreen) {
+          } else if (this.mediumScreen && this.tabletImage) {
             Polymer.dom(this.$.container).setAttribute("style", "background: url("+this.tabletImage+") no-repeat center center;");
             this.updateStyles();
-          } else {
+          } else if (this.phoneImage) {
             console.log('mobile style');
             Polymer.dom(this.$.container).setAttribute("style", "background: url("+this.phoneImage+") no-repeat center center;");
             this.updateStyles();

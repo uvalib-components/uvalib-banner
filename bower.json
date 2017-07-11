@@ -3,10 +3,12 @@
   "description": "Library web banner",
   "main": "uvalib-banner.html",
   "dependencies": {
-    "uvalib-elements": "uvalib-components/uvalib-elements#master"
+    "uvalib-elements": "uvalib-components/uvalib-elements#master",
+    "swiper-behavior": "^1.1.4"
   },
   "resolutions": {
     "lodash": "^4.17.4",
-    "app-storage": "1 - 2"
+    "app-storage": "1 - 2",
+    "promise-polyfill": "^1.0.0"
   }
 }

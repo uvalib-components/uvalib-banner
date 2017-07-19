@@ -4,7 +4,8 @@
   "main": "uvalib-banner.html",
   "dependencies": {
     "uvalib-elements": "uvalib-components/uvalib-elements#master",
-    "swiper-behavior": "^1.1.4"
+    "swiper-behavior": "^1.1.4",
+    "iron-swiper": "uva-components/iron-swiper#master"
   },
   "resolutions": {
     "lodash": "^4.17.4",

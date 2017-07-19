@@ -1,81 +1,53 @@
-<link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../uvalib-models/uvalib-model-banners.html">
-<link rel="import" href="swiper-behavior.html">
+<link rel="import" href="../iron-swiper/iron-swiper.html">
 <link rel="import" href="uvalib-banner.html">
 
 <dom-module id="uvalib-banners">
 
   <template>
-    <style include="swiper-styles"></style>
-    <style>
-    :host {
-      display: block;
-      box-sizing: border-box;
 
-      opacity: 0;
-      transition: opacity 1s ease;
-    }
-    :host([initialised]) {
-      opacity: 1;
-    }
-    .swiper-container {
-      height: 400px;
-    }
-    .swiper-slide {
-      background-color: #ddd;
-    }
-    .swiper-button-prev,
-    .swiper-button-next {
-      background-image: none;
-    }
-    .swiper-button-prev iron-icon,
-    .swiper-button-next iron-icon {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translateX(-50%) translateY(-50%);
-    }
+    <style>
+      :host {
+        display: block;
+        height: 300px;
+        background-color: blue;
+      }
+      uvalib-banner {
+        height: 300px;
+      }
+      iron-swiper {
+        height: 100%;
+      }
     </style>
 
     <uvalib-model-banners data="{{_bannersBuffer}}"></uvalib-model-banners>
-    <div id="swiperContainer"  class="swiper-container">
-      <div class="swiper-wrapper">
-          <!-- Slides -->
+      <iron-swiper loop a11y keyboard-control pagination pagination-clickable>
           <template is="dom-repeat" items="[[_banners]]" as="banner">
-            <!--<div class="swiper-slide">[[banner.title]]</div>-->
             <uvalib-banner
-                class="swiper-slide"
-                uuid="[[banner.uuid]]"
-                narrow-text="[[banner.narrowText]]"
-                large-screen="[[largeScreen]]"
-                medium-screen="[[mediumScreen]]"
-                banner-link="[[banner.link]]"
-                large-image-uuid="[[banner.desktopImage.uuid]]"
-                medium-image-uuid="[[banner.tabletImage.uuid]]"
-                small-image-uuid="[[banner.phoneImage.uuid]]"
-                display-title="[[banner.displayTitle]]"
-                banner-title="[[banner.title]]"
-                banner-body="[[banner.body]]"
-                button-text="[[banner.buttonText]]"
-                shady-mobile="[[banner.shadyMobile]]"
-                shady-tablet="[[banner.shadyTablet]]"
-                tone="[[banner.tone]]"
-                shady-desktop="[[banner.shadyDesktop]]"></uvalib-banner>
+                uuid$="[[banner.uuid]]"
+                narrow-text$="[[banner.narrowText]]"
+                large-screen$="[[largeScreen]]"
+                medium-screen$="[[mediumScreen]]"
+                banner-link$="[[banner.link]]"
+                large-image-uuid$="[[banner.desktopImage.uuid]]"
+                medium-image-uuid$="[[banner.tabletImage.uuid]]"
+                small-image-uuid$="[[banner.phoneImage.uuid]]"
+                display-title$="[[banner.displayTitle]]"
+                banner-title$="[[banner.title]]"
+                banner-body$="[[banner.body]]"
+                button-text$="[[banner.buttonText]]"
+                shady-mobile$="[[banner.shadyMobile]]"
+                shady-tablet$="[[banner.shadyTablet]]"
+                tone$="[[banner.tone]]"
+                shady-desktop$="[[banner.shadyDesktop]]"></uvalib-banner>
           </template>
-      </div>
-      <!-- If we need pagination -->
-      <div class="swiper-pagination" id="swiperPagination"></div>
+      </iron-swiper>
 
-      <!-- If we need navigation buttons -->
-      <div class="swiper-button-prev" id="swiperPrev"></div>
-      <div class="swiper-button-next" id="swiperNext"></div>
-    </div>
   </template>
 
   <script>
     Polymer({
       is: 'uvalib-banners',
-      behaviors: [XBehaviors.SwiperBehavior],
 
       properties: {
         mediumScreen: {
@@ -95,44 +67,13 @@
         },
         _banners: {
           type: Array,
-          observer: "_bannersChange",
+//          observer: "_bannersChange",
           value: function(){
             return [];
-          }
-        },
-        swiperOpts: {
-          type: Object,
-          value: {
-            disableAutoInit: true,
-            paginationClickable: true,
-            slidesPerView: 1,
-            spaceBetween: 0,
-//            breakpoints: {
-//              320: {
-//                slidesPerView: 1,
-//                spaceBetweenSlides: 0
-//              },
-//              480: {
-//                slidesPerView: 1,
-//                spaceBetweenSlides: 0
-//              },
-//              640: {
-//                slidesPerView: 1,
-//                spaceBetweenSlides: 0
-//              }
-//            }
           }
         }
       },
 
-      _bannersChange: function(){
-        this.debounce('init', function(){
-          if (this._banners.length > 0) {
-            this.initSwiper();
-            console.log('init swiper');
-          }
-        },500);
-      },
       _bannersBufferChange: function(){
         this.debounce('bannerbounce', function(){
           if (this._bannersBuffer && this._bannersBuffer.length >= 1) {

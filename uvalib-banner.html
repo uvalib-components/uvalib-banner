@@ -144,7 +144,9 @@ Library web banner
       }
 
     </style>
-
+<!--
+    <img src="https://safetychanger.github.io/iron-swiper/components/iron-swiper/demo/sample.jpg">
+-->
     <template is="dom-if" if="[[_imageUUID]]">
       <uvalib-model-file uuid="[[_imageUUID]]" url="{{_imageURL}}"></uvalib-model-file>
     </template>
@@ -152,7 +154,7 @@ Library web banner
       medscreen$="[[mediumScreen]]" largescreen$="[[largeScreen]]" clickable$="[[_clickable(bannerLink)]]" on-tap="_tapbanner">
       <div id="[[uuid]]" class="shade" on$="[[_isShady(mediumScreen,largeScreen,shadyMobile,shadyTablet,shadyDesktop)]]">
         <div class="text-container" narrow$="[[narrowText]]">
-          <div class="textTitle" hidden="[[!displayTitle]]">[[bannerTitle]]</div>
+          <div class="textTitle" hidden="[[!displayTitle]]">Foo [[bannerTitle]]</div>
           <div class="text" hidden="[[!bannerBody]]" inner-h-t-m-l="[[bannerBody]]"></div>
           <template is="dom-if" if="[[buttonText]]">
             <uvalib-button on-click="_trackLink" href="[[bannerLink]]" raised$="[[_isDark(tone)]]">[[buttonText]]</uvalib-button>
@@ -211,13 +213,16 @@ Library web banner
         tone: String,
         _imageURL: {
           type: String,
-          value: null
+          value: null,
+          notify: true
         },
         _imageUUID: {
           type: String,
-          computed: "_getUUID(largeImageUuid,mediumImageUuid,smallImageUuid)"
+          computed: "_getUUID(largeImageUuid,mediumImageUuid,smallImageUuid)",
+          notify: true
         }
       },
+
       ready: function(){
           this._containerStyle();
       },
@@ -226,6 +231,7 @@ Library web banner
         '_containerStyle(_imageURL,largeScreen,mediumScreen,largeImageUuid,mediumImageUuid,smallImageUuid)',
 //        '_containerStyle()'
       ],
+
       _clickable: function(){
         if (this.bannerLink) {
           return true;
@@ -235,6 +241,7 @@ Library web banner
       _isDark: function(tone){
         return (tone==='Dark');
       },
+
       _getUUID: function(){
         var id = (this.largeScreen)? this.largeImageUuid:
                   (this.mediumScreen)? this.mediumImageUuid:
@@ -251,6 +258,9 @@ Library web banner
           } else if (this.largeScreen && this.desktopImage) {
             Polymer.dom(this.$.container).setAttribute("style", "background: url("+this.desktopImage+") no-repeat top left;");
             this.updateStyles();
+//          } else if (this.largeScreen && this.desktopImageUuid) {
+//            Polymer.dom(this.$.container).setAttribute("style", "background: url(https://storage.googleapis.com/uvalib-api.appspot.com/"+this.desktopImageUuid+") no-repeat top left;");
+//            this.updateStyle();
           } else if (this.mediumScreen && this.tabletImage) {
             Polymer.dom(this.$.container).setAttribute("style", "background: url("+this.tabletImage+") no-repeat center center;");
             this.updateStyles();
@@ -261,6 +271,7 @@ Library web banner
           }
         }, 100);
       },
+
       _isShady: function(){
         return this.largeScreen?  // is the screen large?
                   this.shadyDesktop:  // then return the value of shadyDesktop
@@ -276,6 +287,7 @@ Library web banner
           window.location=link;
         },500);
       }
+
     });
   </script>
 </dom-module>

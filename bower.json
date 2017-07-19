@@ -3,7 +3,8 @@
   "description": "Library web banner",
   "main": "uvalib-banner.html",
   "dependencies": {
-    "uvalib-elements": "uvalib-components/uvalib-elements#master"
+    "uvalib-elements": "uvalib-components/uvalib-elements#master",
+    "iron-swipeable-pages": "^1.2.9"
   },
   "resolutions": {
     "lodash": "^4.17.4",

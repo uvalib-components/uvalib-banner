@@ -1,0 +1,82 @@
+<link rel="import" href="../uvalib-models/uvalib-model-query.html">
+<link rel="import" href="../iron-swiper/iron-swiper.html">
+<link rel="import" href="../uvalib-images/uvalib-image.html">
+<link rel="import" href="uvalib-banner.html">
+
+<dom-module id="uvalib-typed-banners">
+
+  <template>
+
+    <style>
+      :host {
+        display: block;
+        height: 100%;
+        /*
+        background-color: blue;
+        */
+      }
+      uvalib-banner {
+        height: 300px;
+      }
+      iron-swiper {
+        height: 100%;
+      }
+      .main uvalib-image {
+        background-color: white;
+      }
+    </style>
+
+    <uvalib-model-query data="{{_images}}" content-type="mediaobjects" order-by="association" equal-to="100objectsCarousel"></uvalib-model-query>
+      <iron-swiper class="main" loop a11y keyboard-control navigation-buttons>
+          <template is="dom-repeat" items="[[_images]]" as="image">
+            <uvalib-image alt$="{{image.title}}" uuid$="{{image.image.uuid}}"></uvalib-image>
+          </template>
+      </iron-swiper>
+      <!--
+      <iron-swiper class="nav" loop a11y keyboard-control>
+          <template is="dom-repeat" items="[[_images]]" as="image">
+            <uvalib-image thumb alt$="{{image.title}}" uuid$="{{image.image.uuid}}"></uvalib-image>
+          </template>
+      </iron-swiper>
+    -->
+  </template>
+
+  <script>
+    Polymer({
+      is: 'uvalib-typed-banners',
+
+      properties: {
+        mediumScreen: {
+          type: Boolean,
+          value: false
+        },
+        largeScreen: {
+          type: Boolean,
+          value: false
+        },
+        _bannersBuffer: {
+          type: Array,
+          value: function(){
+            return [];
+          },
+          observer: "_bannersBufferChange"
+        },
+        _banners: {
+          type: Array,
+//          observer: "_bannersChange",
+          value: function(){
+            return [];
+          }
+        }
+      },
+
+      _bannersBufferChange: function(){
+        this.debounce('bannerbounce', function(){
+          if (this._bannersBuffer && this._bannersBuffer.length >= 1) {
+            this.set('_banners', this._bannersBuffer);
+          }
+        }, 500);
+      }
+    });
+  </script>
+</dom-module>

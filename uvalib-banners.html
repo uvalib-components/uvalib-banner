@@ -1,5 +1,5 @@
 <link rel="import" href="../uvalib-models/uvalib-model-banners.html">
-<link rel="import" href="../iron-swiper/iron-swiper.html">
+<link rel="import" href="../uva-swiper/uva-swiper.html">
 <link rel="import" href="uvalib-banner.html">
 
 <dom-module id="uvalib-banners">
@@ -15,13 +15,13 @@
       uvalib-banner {
         height: 300px;
       }
-      iron-swiper {
+      uva-swiper {
         height: 100%;
       }
     </style>
 
     <uvalib-model-banners data="{{_bannersBuffer}}"></uvalib-model-banners>
-      <iron-swiper loop a11y keyboard-control pagination pagination-clickable>
+      <uva-swiper loop a11y keyboard-control pagination pagination-clickable>
           <template is="dom-repeat" items="[[_banners]]" as="banner">
             <uvalib-banner
                 uuid$="[[banner.uuid]]"
@@ -41,7 +41,7 @@
                 tone$="[[banner.tone]]"
                 shady-desktop$="[[banner.shadyDesktop]]"></uvalib-banner>
           </template>
-      </iron-swiper>
+      </uva-swiper>
 
   </template>
 

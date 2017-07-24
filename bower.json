@@ -5,7 +5,7 @@
   "dependencies": {
     "uvalib-elements": "uvalib-components/uvalib-elements#master",
     "swiper-behavior": "^1.1.4",
-    "iron-swiper": "uva-components/iron-swiper#master"
+    "uva-swiper": "uva-components/uva-swiper#master"
   },
   "resolutions": {
     "lodash": "^4.17.4",

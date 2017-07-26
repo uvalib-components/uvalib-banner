@@ -30,21 +30,23 @@
       uvalib-image {
         height: 100%;
       }
+      .nav uvalib-image {
+        width: 130px;
+      }
     </style>
+    <h1>[[selected]]</h1>
 
     <uvalib-model-query data="{{_images}}" content-type="mediaobjects" order-by="association" equal-to="100objectsCarousel"></uvalib-model-query>
-      <uva-swiper class="main" loop a11y keyboard-control navigation-buttons>
+      <uva-swiper class="main" a11y keyboard-control navigation-buttons selected="{{selected}}">
           <template is="dom-repeat" items="[[_images]]" as="image">
             <uvalib-image alt$="{{image.title}}" uuid$="{{image.image.uuid}}" sizing="contain"></uvalib-image>
           </template>
       </uva-swiper>
-      <!--
-      <uva-swiper class="nav" a11y keyboard-control options$="[[_navOptions]]" slides-per-view="5">
+      <uva-swiper class="nav" a11y keyboard-control touch-ratio="0.2" slide-to-clicked-slide centered-slides slides-per-view="auto" selected="{{selected}}">
           <template is="dom-repeat" items="[[_images]]" as="image">
-            <uvalib-image thumb alt$="{{image.title}}" uuid$="{{image.image.uuid}}" sizing="crop"></uvalib-image>
+            <uvalib-image thumb alt$="{{image.title}}" uuid$="{{image.image.uuid}}" sizing="crop" style=""></uvalib-image>
           </template>
       </uva-swiper>
-    -->
   </template>
 
   <script>

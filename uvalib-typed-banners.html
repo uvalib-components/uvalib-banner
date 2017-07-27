@@ -1,7 +1,6 @@
 <link rel="import" href="../uvalib-models/uvalib-model-query.html">
 <link rel="import" href="../uva-swiper/uva-swiper.html">
 <link rel="import" href="../uvalib-images/uvalib-image.html">
-<link rel="import" href="uvalib-banner.html">
 
 <dom-module id="uvalib-typed-banners">
 
@@ -14,9 +13,6 @@
         /*
         background-color: blue;
         */
-      }
-      uvalib-banner {
-        height: 300px;
       }
       uva-swiper {
         height: 100%;
@@ -71,23 +67,11 @@
         },
         _banners: {
           type: Array,
-//          observer: "_bannersChange",
           value: function(){
             return [];
           }
-        },
-        _navOptions: {
-          type: Object,
-          value: {
-            spaceBetween: 10,
-            centeredSlides: true,
-//            slidesPerView: 'auto',
-//            touchRatio: 0.2,
-//            slideToClickedSlide: true
-          }
         }
       },
-
       _bannersBufferChange: function(){
         this.debounce('bannerbounce', function(){
           if (this._bannersBuffer && this._bannersBuffer.length >= 1) {

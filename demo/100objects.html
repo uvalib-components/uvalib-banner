@@ -27,6 +27,7 @@
 
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    <link rel="import" href="../../iron-media-query/iron-media-query.html">
     <link rel="import" href="../../uva-brand-style/uva-layout-behavior.html">
 
     <link rel="import" href="../uvalib-typed-banners.html">
@@ -37,13 +38,32 @@
         margin: 0px;
       }
       uvalib-typed-banners {
-        height: 400px;
+        height: 550px;
+        --uvalib-banner-desc-height: 130px;
+      }
+      @media screen and ( max-width: 64em ){
+        uvalib-typed-banners {
+          --uvalib-banner-desc-height: 140px;
+        }
+      }
+      @media screen and ( max-width: 52em ){
+        uvalib-typed-banners {
+          --uvalib-banner-desc-height: 160px;
+        }
+      }
+      @media screen and ( max-width: 40em ){
+        uvalib-typed-banners {
+          --uvalib-banner-desc-height: 210px;
+          --uvalib-banner-thumb-height: 70px;
+          font-size: .9em;
+        }
       }
     </style>
   </head>
   <body unresolved>
     <template is="dom-bind" id="app">
-      <uvalib-typed-banners></uvalib-typed-banners>
+      <iron-media-query query="(max-width: 40em)" query-matches="{{smScreen}}"></iron-media-query>
+      <uvalib-typed-banners thumbs buttons$="{{!smScreen}}"></uvalib-typed-banners>
       <div style="height:5000px">
       </div>
     </template>

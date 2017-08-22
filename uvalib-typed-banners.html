@@ -43,7 +43,7 @@
         @apply(--layout-flex);
       }
       .description {
-        
+        position: relative;
         font-size: 1.2em;
         width: 100%;
         height: var(--uvalib-banner-desc-height);
@@ -51,7 +51,7 @@
         color: white;
       }
       .desc-wrapper {
-
+        position: relative;
         height: var(--uvalib-banner-desc-height);
         padding-bottom: 50px;
         padding-left: 20px;
@@ -63,6 +63,8 @@
       }
       .nav {
         background-color:rgba(0, 0, 0, 0.5);
+        position: relative;
+        top: -20px;
       }
     </style>
     <uvalib-model-query data="{{_images}}" content-type="mediaobjects" order-by="association" equal-to="100objectsCarousel"></uvalib-model-query>

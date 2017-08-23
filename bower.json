@@ -10,6 +10,29 @@
   "resolutions": {
     "lodash": "^4.17.4",
     "app-storage": "1 - 2",
-    "promise-polyfill": "^1.0.0"
+    "promise-polyfill": "^1.0.0",
+    "uvalib-elements": "master",
+    "polymerfire": "^2.1.0",
+    "uvalib-analytics": "master",
+    "uva-footer": "master",
+    "uvalib-logos": "master",
+    "uvalib-alerts": "master",
+    "uvalib-theme": "master",
+    "uvalib-button": "master",
+    "uvalib-events-card": "master",
+    "uvalib-hours-card": "master",
+    "uvalib-skip-nav": "master",
+    "uvalib-nav": "master",
+    "uvalib-header": "master",
+    "uvalib-news-section": "master",
+    "uvalib-search-box": "master",
+    "uvalib-card": "master",
+    "uvalib-liame": "master",
+    "uvalib-helper-libs": "master",
+    "uvalib-models": "master",
+    "uvalib-footer": "master",
+    "firebase": "^4.1.1",
+    "uva-brand-style": "master",
+    "uva-centered-logo": "master"
   }
 }

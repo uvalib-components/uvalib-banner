@@ -7,7 +7,7 @@
     <script>
 
     // setup Polymer options
-//    window.Polymer = {lazyRegister: true, dom: 'shadow'};
+    window.Polymer = {lazyRegister: true, dom: 'shadow'};
 
     // load webcomponents polyfills
     (function() {
@@ -63,8 +63,8 @@
   <body unresolved>
     <template is="dom-bind" id="app">
       <iron-media-query query="(max-width: 40em)" query-matches="{{smScreen}}"></iron-media-query>
-      <uvalib-typed-banners thumbs buttons$="{{!smScreen}}"></uvalib-typed-banners>
-      <div style="height:5000px">
+      <uvalib-typed-banners thumbs buttons$="{{!smScreen}}" content-type="mediaobjects" match-key="association" match-value="100objectsCarousel"></uvalib-typed-banners>
+      <div style="height:5000px; background-color: blue;">
       </div>
     </template>
 

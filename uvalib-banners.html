@@ -252,9 +252,12 @@ Library web banners display
         }
       },
       _bannersChange: function(){
-        this.selected = Math.round(Math.random()* (this.banners.length-1) );
-        console.log(this.selected);
+        if (this.banners && this.banners.length) {
+          this.selected = Math.round(Math.random()* (this.banners.length-1) );
+          console.log(this.selected);
+        }
       },
+      
       _bannersBufferChange: function(){
         this.debounce('bannerbounce', function(){
           if (this._bannersBuffer && this._bannersBuffer.length >= 1) {

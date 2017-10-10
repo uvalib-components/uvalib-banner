@@ -87,10 +87,10 @@
       }
 */
     </style>
-    <uvalib-model-query data="{{_images}}" content-type="{{contentType}}" order-by="{{matchKey}}" equal-to="{{matchValue}}"></uvalib-model-query>
+    <uvalib-model-query data="{{items}}" content-type="{{contentType}}" order-by="{{matchKey}}" equal-to="{{matchValue}}"></uvalib-model-query>
     <div id="container">
       <uva-swiper class="main" a11y keyboard-control navigation-buttons$="{{buttons}}" selected="{{selected}}">
-          <template is="dom-repeat" items="[[_images]]" as="image">
+          <template is="dom-repeat" items="[[items]]" as="image">
             <div class="full-entity">
               <uvalib-image alt$="{{image.title}}" uuid$="{{image.image.uuid}}" sizing="contain" style="height: 100%;"></uvalib-image>
 <!--
@@ -105,7 +105,7 @@
       <template is="dom-if" if="{{thumbs}}">
         <uva-swiper selected="{{selected}}" class="nav" touch-ratio="0.2" slide-to-clicked-slide centered-slides slides-per-view="8">
         <!--<uva-swiper class="nav" a11y keyboard-control slide-to-clicked-slide centered-slides slides-per-view="auto" selected="{{selected}}">-->
-            <template is="dom-repeat" items="[[_images]]" as="image">
+            <template is="dom-repeat" items="[[items]]" as="image">
                 <uvalib-image thumb alt$="{{image.title}}" uuid$="{{image.image.uuid}}" sizing="crop"></uvalib-image>
             </template>
         </uva-swiper>
@@ -159,6 +159,10 @@
         matchValue: {
           type: String,
           value: null
+        },
+        items: {
+          type: Array,
+          value: function(){return [];}
         }
       },
       _bannersBufferChange: function(){

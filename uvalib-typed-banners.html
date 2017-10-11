@@ -55,7 +55,7 @@
           <template is="dom-repeat" items="[[items]]" as="image">
             <div class="full-entity">
               <uvalib-image class="style1" alt$="{{image.title}}" uuid$="{{image.image.uuid}}" sizing="contain"></uvalib-image>
-              <template is="{{image.body}}">
+              <template is="dom-if" if="{{image.body}}">
                 <div class="style2 description">
                   <div class="desc-wrapper" inner-h-t-m-l="{{image.body}}"></div>
                 </div>

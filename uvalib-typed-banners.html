@@ -19,6 +19,20 @@
       }
       .main {
         @apply(--layout-flex);
+
+        --uva-swiper-slide: {
+          @apply(--layout-vertical);
+          font-family: Franklin Gothic,sans-serif;
+          font-style: normal;
+          font-weight: 400;
+          font-size: 16px;
+        };
+        --uva-swiper-slide-style1: {
+          @apply(--layout-flex);
+        };
+        --uva-swiper-slide-style2: {
+          padding: 10px;
+        };
       }
       .nav {
         height: 200px;
@@ -32,72 +46,31 @@
           filter: none;
         };
       }
+      /*
       .full-entity {
         width: 100%;
         @apply(--layout-vertical);
-/*        background-color: blue;  */
       }
       .full-entity uvalib-image {
         display: block;
         height: 100%;
         @apply(--layout-flex);
       }
-/*
-      uva-swiper.main {
-        @apply(--layout-flex);
-      }
-
-      uva-swiper.nav {
+      .full-entity .description {
         height: 100px;
       }
+      */
 
-      .nav uvalib-image {
-        width: 130px;
-      }
-      .main uvalib-image {
-        width: 100%;
-      }
-      .swiper-wrapper {
-        @apply(--layout-vertical);
-      }
-
-      .description {
-        position: relative;
-        font-size: 1.2em;
-        width: 100%;
-        height: var(--uvalib-banner-desc-height);
-        bottom: -30px;
-        color: white;
-      }
-      .desc-wrapper {
-        position: relative;
-        height: var(--uvalib-banner-desc-height);
-        padding-bottom: 50px;
-        padding-left: 20px;
-        padding-right: 20px;
-        padding-top: 10px;
-        top: -50px;
-        color: white;
-        background-color:rgba(0, 0, 0, 0.5);
-      }
-      .nav {
-        background-color:rgba(0, 0, 0, 0.5);
-        position: relative;
-        top: -20px;
-      }
-*/
     </style>
     <uvalib-model-query data="{{items}}" content-type="{{contentType}}" order-by="{{matchKey}}" equal-to="{{matchValue}}"></uvalib-model-query>
     <div id="container">
       <uva-swiper class="main" a11y keyboard-control navigation-buttons$="{{buttons}}" selected="{{selected}}">
           <template is="dom-repeat" items="[[items]]" as="image">
             <div class="full-entity">
-              <uvalib-image alt$="{{image.title}}" uuid$="{{image.image.uuid}}" sizing="contain" style="height: 100%;"></uvalib-image>
-<!--
-              <div class="description">
+              <uvalib-image class="style1" alt$="{{image.title}}" uuid$="{{image.image.uuid}}" sizing="contain"></uvalib-image>
+              <div class="style2 description">
                 <div class="desc-wrapper" inner-h-t-m-l="{{image.body}}"></div>
               </div>
-            -->
             </div>
           </template>
       </uva-swiper>

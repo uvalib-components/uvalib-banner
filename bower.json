@@ -33,6 +33,16 @@
     "uvalib-footer": "master",
     "firebase": "^4.1.1",
     "uva-brand-style": "master",
-    "uva-centered-logo": "master"
+    "uva-centered-logo": "master",
+    "polymer": "^1.10.1",
+    "webcomponentsjs": "^0.7.24",
+    "iron-demo-helpers": "^1.0.0",
+    "iron-component-page": "^1.0.0",
+    "iron-doc-viewer": "^1.0.1",
+    "iron-flex-layout": "1 - 2",
+    "iron-icon": "^1.0.0",
+    "iron-iconset-svg": "^1.0.0",
+    "iron-location": "1 - 2",
+    "app-layout": "1 - 2"
   }
 }

@@ -47,20 +47,6 @@
           filter: none;
         };
       }
-      /*
-      .full-entity {
-        width: 100%;
-        @apply(--layout-vertical);
-      }
-      .full-entity uvalib-image {
-        display: block;
-        height: 100%;
-        @apply(--layout-flex);
-      }
-      .full-entity .description {
-        height: 100px;
-      }
-      */
 
     </style>
     <uvalib-model-query data="{{items}}" content-type="{{contentType}}" order-by="{{matchKey}}" equal-to="{{matchValue}}"></uvalib-model-query>
@@ -69,9 +55,11 @@
           <template is="dom-repeat" items="[[items]]" as="image">
             <div class="full-entity">
               <uvalib-image class="style1" alt$="{{image.title}}" uuid$="{{image.image.uuid}}" sizing="contain"></uvalib-image>
-              <div class="style2 description">
-                <div class="desc-wrapper" inner-h-t-m-l="{{image.body}}"></div>
-              </div>
+              <template is="{{image.body}}">
+                <div class="style2 description">
+                  <div class="desc-wrapper" inner-h-t-m-l="{{image.body}}"></div>
+                </div>
+              </template>
             </div>
           </template>
       </uva-swiper>

@@ -24,7 +24,7 @@
     <iron-swiper id="main" selected="{{selected}}">
       <template is="dom-repeat" items="[[banners]]" as="banner">
         <div>
-          <iron-image sizing="cover" src$="[[_getImage(banner)]]" alt$="[[_getAlt(banner)]]" style="position:absolute;top:0;right:0;bottom:0;left:0;"></iron-image>
+          <iron-image position="left" sizing="cover" src$="[[_getImage(banner)]]" alt$="[[_getAlt(banner)]]" style="position:absolute;top:0;right:0;bottom:0;left:0;"></iron-image>
         </div>
       </template>
     </iron-swiper>

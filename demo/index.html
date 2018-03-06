@@ -1,41 +1,36 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <title>uvalib-banner demo</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+
+    <title>uvalib-banner demo</title>
+
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
 
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="../../iron-media-query/iron-media-query.html">
-    <link rel="import" href="../../uva-brand-style/uva-layout-behavior.html">
-
     <link rel="import" href="../uvalib-banner.html">
 
-    <style is="custom-style" include="demo-pages-shared-styles">
-      body {
-        padding: 0px;
-        margin: 0px;
-      }
-      uvalib-banner {
-        /* height: auto; */
-      }
-    </style>
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        uvalib-banner {
+          height: 300px;
+        }
+      </style>
+    </custom-style>
   </head>
-  <body unresolved>
-    <template is="dom-bind" id="app">
-      <iron-media-query query="{{mediumScreenQuery}}" query-matches="{{mediumScreen}}"></iron-media-query>
-      <iron-media-query query="{{largeScreenQuery}}" query-matches="{{largeScreen}}"></iron-media-query>
+  <body>
+    <div class="vertical-section-container centered">
+      <h3>Basic uvalib-banner demo</h3>
+      <demo-snippet>
+        <template>
 
-      <uvalib-banners large-screen$="{{largeScreen}}" medium-screen$="{{mediumScreen}}"></uvalib-banners>
-      <div style="height:5000px"></div>
-    </template>
+              <uvalib-banner></uvalib-banner>
 
-    <script>
-      var scope = document.querySelector('template[is="dom-bind"]');
-      scope.mediumScreenQuery = uvabehaviors.layout.properties.mediumScreenQuery.value;
-      scope.largeScreenQuery = uvabehaviors.layout.properties.largeScreenQuery.value;
-    </script>
+        </template>
+      </demo-snippet>
+    </div>
+
   </body>
 </html>

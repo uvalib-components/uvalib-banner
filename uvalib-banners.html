@@ -23,7 +23,7 @@
     <iron-swiper id="main" selected="{{selected}}">
       <template is="dom-repeat" items="[[banners]]" as="banner">
         <div>
-          <uvalib-banner obj$="[[banner]]"></uvalib-banner>
+          <uvalib-banner obj$="[[banner]]" small-screen$="[[smallScreen]]" medium-screen$="[[mediumScreen]]" large-screen$="[[largeScreen]]"></uvalib-banner>
         </div>
       </template>
     </iron-swiper>

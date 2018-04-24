@@ -75,15 +75,16 @@
           margin-bottom: 9px;
         }
         :host([large-screen]) .text-container .textTitle {
-          font-style: normal;
-          font-weight: 400;
-          font-size: 1.9em;
-          line-height: 1;
           margin-bottom: 18px;
         }
+        :host([large-screen]) .text-container .textTitle {
+          @apply --h1;
+          color: var(--uvalib-white);
+        }
+
         /* container for the body text */
         [tone="Light"] .text-container .text, [tone="Light"] .text-container .textTitle {
-          color: black;
+          color: var(--uvalib-black);
         }
         .text-container .text {
           color: var(--color-white);

@@ -62,26 +62,31 @@
           font-style: normal;
           font-stretch: normal;
           letter-spacing: normal;
-          color: var(--color-white);
         }
         :host([small-screen]) .text-container .textTitle {
-          font-size: 24px;
-          line-height: 1.25;
+          @apply --h1;
+          font-size: calc(var(--uvalib-main-font-size-unit)*1.5);
+          line-height: calc(var(--uvalib-main-font-size-unit)*1.5);
+          font-weight: 500;
+          color: var(--uvalib-white);
+          margin-top: 0;
           margin-bottom: 8px;
         }
         :host([medium-screen]) .text-container .textTitle {
-          font-size: 34px;
-          line-height: 1.18;
+          @apply --h1;
+          font-size: calc(var(--uvalib-main-font-size-unit)*2.125);
+          line-height: calc(var(--uvalib-main-font-size-unit)*2.125);
+          font-weight: 500;
+          color: var(--uvalib-white);
+          margin-top: 0;
           margin-bottom: 9px;
-        }
-        :host([large-screen]) .text-container .textTitle {
-          margin-bottom: 18px;
         }
         :host([large-screen]) .text-container .textTitle {
           @apply --h1;
           font-size: calc(var(--uvalib-main-font-size-unit)*3);
           line-height: calc(var(--uvalib-main-font-size-unit)*3);
           color: var(--uvalib-white);
+          margin-bottom: 18px;
         }
 
         /* container for the body text */
@@ -97,17 +102,17 @@
           letter-spacing: normal;
         }
         :host([small-screen]) .text-container .text {
-          font-size: 1em;
-          line-height: 1;
+          font-size: var(--uvalib-main-font-size-unit);
+          line-height: var(--uvalib-main-font-size-unit);
           margin-bottom: 16px;
         }
         :host([medium-screen]) .text-container .text {
-          font-size: 1.1em;
-          line-height: 1.5;
+          font-size: calc(var(--uvalib-main-font-size-unit)*1.1);
+          line-height: calc(var(--uvalib-main-font-size-unit)*1.1);
           margin-bottom: 9px;
         }
         :host([large-screen]) .text-container .text {
-          font-size: 1.1em;
+          font-size: calc(var(--uvalib-main-font-size-unit)*1.1);
           line-height: 1.33;
           margin-bottom: 20px;
         }

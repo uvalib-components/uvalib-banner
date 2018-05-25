@@ -40,13 +40,15 @@
     </custom-style>
     <uva-library path="web/banners" last-response="{{banners}}"></uva-library>
 
-    <iron-swiper a11y id="main" selected="{{selected}}">
-      <template is="dom-repeat" items="[[banners]]" as="banner">
-        <div>
-          <uvalib-banner obj$="[[banner]]" small-screen$="[[smallScreen]]" medium-screen$="[[mediumScreen]]" large-screen$="[[largeScreen]]"></uvalib-banner>
-        </div>
-      </template>
-    </iron-swiper>
+    <template is="dom-if" if="[[banners]]">
+      <iron-swiper a11y id="main" selected="{{selected}}" options="[[_mainSwiperOptions]]">
+        <template is="dom-repeat" items="[[banners]]" as="banner">
+          <div>
+            <uvalib-banner obj$="[[banner]]" small-screen$="[[smallScreen]]" medium-screen$="[[mediumScreen]]" large-screen$="[[largeScreen]]"></uvalib-banner>
+          </div>
+        </template>
+      </iron-swiper>
+    </template>
 
     <template is="dom-if" if="[[_showThumbs(smallScreen, banners)]]">
       <iron-swiper a11y id="thumbs" selected="{{selected}}" touch-ratio="0.2" slide-to-clicked-slide centered-slides navigation-buttons options='{"slidesPerView":5,"centeredSlides":true,"spaceBetween":10}'>
@@ -77,8 +79,24 @@
             computed: '_moreThanOne(banners)'
           },
           banners: Array,
-          selected: Number
+          selected: {
+            type:Number,
+            observer: '_selectedChanged'
+          },
+          _mainSwiperOptions: {
+            type: Object,
+            notify: true,
+            value: function(){
+              return {on:{
+                        init: this._mainInit.bind(this)
+                      }};
+            }
+
+          }
         });
+      }
+      _mainInit() {
+
       }
       _showThumbs(smallScreen, banners) {
         return (!smallScreen && this._moreThanOne(banners));
@@ -92,6 +110,10 @@
         var childTemplate = Polymer.DomModule.import('uvalib-banners', 'template');
         parentTemplate.content.insertBefore(childTemplate.content,null);
         return parentTemplate;
+      }
+      _selectedChanged(){
+          var selBanner = this.banners[(this.selected)?this.selected:0];
+          this.dispatchEvent(new CustomEvent('uvalib-analytics-event', {bubbles: true, composed: true, detail: {track:['banners','selected',selBanner.title]}}));
       }
     }
 

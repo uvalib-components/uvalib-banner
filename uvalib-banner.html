@@ -203,7 +203,7 @@
       _onClick(e){
         e.preventDefault();
         var link = e.currentTarget.shadowRoot.querySelector('a:not([hidden])')?e.currentTarget.shadowRoot.querySelector('a:not([hidden])').getAttribute('href'):null;
-        this.dispatchEvent(new CustomEvent('uvalib-analytics-event', {bubbles: true, composed: true, detail: {track:['banner','click',link]}}));
+        this.dispatchEvent(new CustomEvent('uvalib-analytics-event', {bubbles: true, composed: true, detail: {track:['banner','click',this.obj.title,(link)?1:0]}}));
         if (link)
         setTimeout(function(){
           window.location=link;

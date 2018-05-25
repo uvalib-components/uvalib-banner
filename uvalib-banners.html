@@ -48,14 +48,16 @@
           </div>
         </template>
       </iron-swiper>
-    </template>
 
-    <template is="dom-if" if="[[_showThumbs(smallScreen, banners)]]">
-      <iron-swiper a11y id="thumbs" selected="{{selected}}" touch-ratio="0.2" slide-to-clicked-slide centered-slides navigation-buttons options='{"slidesPerView":5,"centeredSlides":true,"spaceBetween":10}'>
-        <template is="dom-repeat" items="[[banners]]" as="banner">
-          <iron-image src$="[[banner.phoneImage.url]]" alt$="Thumbnail for [[banner.title]]" style="width:50px; height:75px;" sizing="cover"  /></iron-image>
-        </template>
-      </iron-swiper>
+
+      <template is="dom-if" if="[[_showThumbs(smallScreen, banners)]]">
+        <iron-swiper a11y id="thumbs" selected="{{selected}}" touch-ratio="0.2" slide-to-clicked-slide centered-slides navigation-buttons options='{"slidesPerView":5,"centeredSlides":true,"spaceBetween":10}'>
+          <template is="dom-repeat" items="[[banners]]" as="banner">
+            <iron-image src$="[[banner.phoneImage.url]]" alt$="Thumbnail for [[banner.title]]" style="width:50px; height:75px;" sizing="cover"  /></iron-image>
+          </template>
+        </iron-swiper>
+      </template>
+
     </template>
 
   </template>

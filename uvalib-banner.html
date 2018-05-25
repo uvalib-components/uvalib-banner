@@ -175,6 +175,10 @@
           }
         };
       }
+      ready() {
+        this.addEventListener('click', this._onClick);
+        super.ready();
+      }
 
       _getImage(banner) {
         return (this.largeScreen)? banner.desktopImage.url:
@@ -196,10 +200,11 @@
                       this.shadyTablet:  // return the value of shadyTablet
                       this.shadyMobile;  // else the screen is small, return the value of shadyMobile
       }
-      _trackLink(e){
+      _onClick(e){
         e.preventDefault();
-        var link = e.currentTarget.href;
-        this.dispatchEvent(new CustomEvent('banner-link-click', {detail: {href:link}}));
+        var link = e.currentTarget.shadowRoot.querySelector('a:not([hidden])')?e.currentTarget.shadowRoot.querySelector('a:not([hidden])').getAttribute('href'):null;
+        this.dispatchEvent(new CustomEvent('uvalib-banner-click', {bubbles: true, detail: {href:link}}));
+        if (link)
         setTimeout(function(){
           window.location=link;
         },500);

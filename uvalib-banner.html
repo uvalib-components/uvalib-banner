@@ -121,13 +121,10 @@
           background-color: var(--uvalib-blue-500);
         }
       }
-      .text-container[narrow] {
-        max-width: 400px;
-      }
       </style>
     </custom-style>
     <iron-image position="left" sizing="cover" src$="[[_getImage(obj)]]" alt$="[[_getAlt(obj)]]" style=""></iron-image>
-    <div class="text-container" narrow$="[[obj.narrowText]]">
+    <div class="text-container">
       <div class="textTitle" hidden="[[!obj.displayTitle]]">[[obj.title]]</div>
       <div class="text" hidden="[[!obj.body]]" inner-h-t-m-l="[[obj.body]]"></div>
       <a href="[[obj.link]]" tabindex="-1" hidden$="[[!obj.buttonText]]"><paper-button raised$="[[_isDark(obj.tone)]]">[[obj.buttonText]]</paper-button></a>

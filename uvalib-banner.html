@@ -82,7 +82,7 @@
         }
 
         /* container for the body text */
-        [tone="Light"] .text-container .text, [tone="Light"] .text-container .textTitle {
+        :host([tone="Light"]) .text-container .text, :host([tone="Light"]) .text-container .textTitle {
           color: var(--uvalib-black);
         }
         .text-container .text {
@@ -115,7 +115,7 @@
           background-color: var(--uvalib-blue-700);
         };
       }
-      [tone="Light"] paper-button {
+      :host([tone="Light"]) paper-button {
         color: var(--color-white);
         --paper-button: {
           background-color: var(--uvalib-blue-500);
@@ -127,7 +127,7 @@
       </style>
     </custom-style>
     <iron-image position="left" sizing="cover" src$="[[_getImage(obj)]]" alt$="[[_getAlt(obj)]]" style=""></iron-image>
-    <div tone$="[[obj.tone]]" class="text-container" narrow$="[[obj.narrowText]]">
+    <div class="text-container" narrow$="[[obj.narrowText]]">
       <div class="textTitle" hidden="[[!obj.displayTitle]]">[[obj.title]]</div>
       <div class="text" hidden="[[!obj.body]]" inner-h-t-m-l="[[obj.body]]"></div>
       <a href="[[obj.link]]" tabindex="-1" hidden$="[[!obj.buttonText]]"><paper-button raised$="[[_isDark(obj.tone)]]">[[obj.buttonText]]</paper-button></a>
@@ -165,7 +165,8 @@
           },
           tone: {
             type: String,
-            value: "Dark"
+            value: "Dark",
+            reflectToAttribute: true
           }
         };
       }

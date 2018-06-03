@@ -22,15 +22,6 @@
           bottom:0;
           left:0;
         }
-        #shade {
-          z-index: 7;
-          position:absolute;
-          background-image: linear-gradient(to top, rgba(0, 126, 237, 0), rgba(0, 0, 0, 0.66));
-          top:0;
-          right:0;
-          bottom:0;
-          left:0;
-        }
         .text-container {
           z-index: 10;
           position: absolute;
@@ -135,7 +126,6 @@
       }
       </style>
     </custom-style>
-    <div id="shade" hidden$="[[!_isShady(largeScreen,mediumScreen,smallScreen)]]"></div>
     <iron-image position="left" sizing="cover" src$="[[_getImage(obj)]]" alt$="[[_getAlt(obj)]]" style=""></iron-image>
     <div tone$="[[obj.tone]]" class="text-container" narrow$="[[obj.narrowText]]">
       <div class="textTitle" hidden="[[!obj.displayTitle]]">[[obj.title]]</div>
@@ -192,13 +182,6 @@
       }
       _isDark(tone){
         return (tone==='Dark');
-      }
-      _isShady(){
-        return this.largeScreen?  // is the screen large?
-                  this.shadyDesktop:  // then return the value of shadyDesktop
-                  this.mediumScreen?  // else if the screen is medium
-                      this.shadyTablet:  // return the value of shadyTablet
-                      this.shadyMobile;  // else the screen is small, return the value of shadyMobile
       }
       _onClick(e){
         e.preventDefault();

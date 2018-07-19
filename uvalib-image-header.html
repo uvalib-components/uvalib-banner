@@ -1,10 +1,6 @@
-<link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../uvalib-theme/uvalib-ui-element.html">
-<link rel="import" href="../paper-button/paper-button.html">
-<link rel="import" href="../uvalib-theme/uvalib-theme.html">
-<link rel="import" href="../iron-image/iron-image.html">
 
-<dom-module id="uvalib-banner">
+<dom-module id="uvalib-image-header">
   <template>
     <custom-style>
       <style include="uvalib-theme">
@@ -52,62 +48,24 @@
      *
      * @customElement
      * @polymer
-     * @demo demo/index.html
+     * @demo demo/image-header.html
      */
-    class UvalibImageHeader extends Polymer.Element {
+    class UvalibImageHeader extends UvalibUiElement {
       static get is() { return 'uvalib-image-header'; }
       static get properties() {
-        return {
-          largeScreen: {
-            type:Boolean,
-            reflectToAttribute: true
-          },
-          mediumScreen: {
-            type:Boolean,
-            reflectToAttribute: true
-          },
-          smallScreen: {
-            type:Boolean,
-            reflectToAttribute: true
-          },
-          obj: {
-            type:Object,
-            function(){return null;}
-          },
-          tone: {
-            type: String,
-            value: "Dark",
-            reflectToAttribute: true
-          }
-        };
-      }
-      ready() {
-        this.addEventListener('click', this._onClick);
-        super.ready();
+        return Object.assign(super.properties,
+            {
+            });
       }
 
-      _getImage(banner) {
-        return (this.largeScreen)? banner.desktopImage.url:
-                              (this.mediumScreen)? banner.tabletImage.url:
-                                              banner.phoneImage.url;
+      //Concat the this elements template with the parents
+      static get template() {
+        var parentTemplate = UvalibUiElement.template.cloneNode(true);
+        var childTemplate = Polymer.DomModule.import('uvalib-image-header', 'template');
+        parentTemplate.content.insertBefore(childTemplate.content,null);
+        return parentTemplate;
       }
-      _getAlt(banner) {
-        return (this.largeScreen)? banner.desktopImage.alt:
-                              (this.mediumScreen)? banner.tabletImage.alt:
-                                              banner.phoneImage.alt;
-      }
-      _isDark(tone){
-        return (tone==='Dark');
-      }
-      _onClick(e){
-        e.preventDefault();
-        var link = e.currentTarget.shadowRoot.querySelector('a:not([hidden])')?e.currentTarget.shadowRoot.querySelector('a:not([hidden])').getAttribute('href'):null;
-        this.dispatchEvent(new CustomEvent('uvalib-analytics-event', {bubbles: true, composed: true, detail: {track:['banner','click',this.obj.title,(link)?1:0]}}));
-        if (link)
-        setTimeout(function(){
-          window.location=link;
-        },500);
-      }
+
     }
 
     window.customElements.define(UvalibImageHeader.is, UvalibImageHeader);

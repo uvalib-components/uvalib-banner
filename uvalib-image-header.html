@@ -3,40 +3,44 @@
 <dom-module id="uvalib-image-header">
   <template>
     <custom-style>
-      <style include="uvalib-theme">
-        :host {
+      <style>
+        .header-container {
           position: relative;
-          display: block;
+          margin-top: -1px;
+        }
+
+        .header-area {
+           position: absolute;
+           top:0;
+           bottom: 0;
+           height: 375px;
+           width: 100vw;
+           z-index: 1;
+        }
+        .header-area iron-image {
           width: 100%;
           height: 100%;
         }
-        .header-area {
-          display: block;
-          width: 100vw;
-          height: 400px;
-          background-image: url("https://static.lib.virginia.edu/files/temp-images/NCSU_FPO_ONLY-22.jpg");
-          padding: 25px;
-        }
-        .header-area h1 {
+
+        ::slotted(*) {
           padding: 10px;
           border-radius: 5px;
-          background-color: rgba(255, 255, 255, 0.7);
-          margin: 0 25px;
+          background-color: rgba(255, 255, 255, 0.9);
+          margin: 16px;
           width: 360px;
-        }
-        .header-area p {
-          padding: 10px;
-          border-radius: 5px;
-          background-color: rgba(255, 255, 255, 0.8);
-          margin: 25px;
-          width: 360px;
+          z-index: 10;
         }
       </style>
     </custom-style>
-    <div class="layout horizontal center-center" style="border: 1px solid blue;">
+    <div class="header-container layout horizontal center-center">
       <div class="header-area">
-        <slot class="flex" name="header-title"></slot>
-        <slot class="flex" name="header-description"></slot>
+        <iron-image src="[[src]]" atl="[[alt]]" sizing="cover"></iron-image>
+      </div>
+      <div class="layout horizontal end-justified" style="width: 100%; border:5px solid cyan; z-index: 20;">
+          <div class="flex layout vertical" style="border:3px solid red;">
+            <slot class="flex" name="header-title"></slot>
+            <slot class="flex" name="header-description"></slot>
+          <div>
       </div>
     </div>
   </template>
@@ -55,6 +59,7 @@
       static get properties() {
         return Object.assign(super.properties,
             {
+              src:String,alt:String,
             });
       }
 

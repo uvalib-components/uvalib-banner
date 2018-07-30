@@ -38,6 +38,7 @@
         }
         .header-text-container-block {
           height: 375px;
+          max-width: 75%;
         }
         ::slotted(*) {
           margin: 0;
@@ -48,7 +49,8 @@
 
         }
         #header-p ::slotted(*) {
-          @apply --h4;
+          font-size: calc(var(--uvalib-spacing-unit)*1.25);
+          line-height: 1;
           color: var(--uvalib-main-white);
           font-weight: 400;
           letter-spacing: 1px;

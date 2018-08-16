@@ -13,6 +13,7 @@
     <link rel="import" href="../../polymer/lib/elements/dom-bind.html">
     <link rel="import" href="../../iron-media-query/iron-media-query.html">
     <link rel="import" href="../uvalib-banners.html">
+    <link rel="import" href="../uva-models/uva-library.html">
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
         uvalib-banners {
@@ -26,7 +27,12 @@
       <h3>Basic uvalib-banners demo</h3>
       <demo-snippet>
         <template>
-          <uvalib-banners></uvalib-banners>
+          <dom-bind>
+            <template>
+              <uva-library path="web/banners" last-response="{{banners}}"></uva-library>
+              <uvalib-banners banners="[[banners]]"></uvalib-banners>
+            </template>
+          </dom-bind>
         </template>
       </demo-snippet>
     </div>

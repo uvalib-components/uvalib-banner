@@ -1,9 +1,10 @@
 <link rel="import" href="../uvalib-theme/uvalib-ui-element.html">
 <link rel="import" href="../uvalib-theme/uvalib-theme.html">
-<link rel="import" href="../uva-models/uva-library.html">
 <link rel="import" href="../iron-swiper/iron-swiper.html">
 <link rel="import" href="../iron-image/iron-image.html">
 <link rel="import" href="uvalib-banner.html">
+<link rel="import" href="../iron-a11y-announcer/iron-a11y-announcer.html">
+<link rel="import" href="../polymer/lib/utils/debounce.html">
 
 <dom-module id="uvalib-banners">
   <template>
@@ -87,18 +88,15 @@
           _mainSwiperOptions: {
             type: Object,
             notify: true,
-//            value: function(){
-//              return {on:{
-//                        init: this._mainInit.bind(this)
-//                      }};
-//            }
-
           }
         });
       }
-//      _mainInit() {
-//
-//      }
+
+      connectedCallback() {
+        super.connectedCallback();
+        Polymer.IronA11yAnnouncer.requestAvailability();
+      }
+
       _showThumbs(smallScreen, banners) {
         return (!smallScreen && this._moreThanOne(banners));
       }
@@ -114,7 +112,24 @@
       }
       _selectedChanged(){
           var selBanner = this.banners[(this.selected)?this.selected:0];
-          this.dispatchEvent(new CustomEvent('uvalib-analytics-event', {bubbles: true, composed: true, detail: {track:['banners','selected',selBanner.title]}}));
+          this._selectedDebouncer = Polymer.Debouncer.debounce(this._debouncer,
+              Polymer.Async.timeOut.after(500),
+              function(){
+                if (this.banners && this.banners.length>1) {
+                  // alert analytics that we have a view of a banner
+                  this.dispatchEvent(new CustomEvent('uvalib-analytics-event', {bubbles: true, composed: true, detail: {track:['banners','selected',selBanner.title]}}));
+                  // message for a11y announcer
+                  var newmessage = `Item ${this.selected+1} of ${this.banners.length}`;
+                  // skip the first message which is on setup / init selection
+                  if (this.message && this.message != newmessage) {
+                    this.message = newmessage;
+                    // alert iron-announce of the message
+                    this.dispatchEvent(new CustomEvent('iron-announce', {bubbles: true, composed: true, detail: {text: this.message}}));
+                  } else {
+                    this.message = newmessage;
+                  }
+                }
+              }.bind(this));
       }
     }
 

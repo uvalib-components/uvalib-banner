@@ -60,8 +60,8 @@
     </custom-style>
     <div class="header-container layout horizontal center-center">
       <div class="header-image-area flex">
-        <div class="img-overlay"></div>
-        <iron-image src="[[src]]" atl="[[alt]]" sizing="cover"></iron-image>
+        <div class="img-overlay" hidden$="[[noOverlay]]"></div>
+        <iron-image src="[[src]]" atl="[[alt]]" sizing="cover" position="[[position]]"></iron-image>
       </div>
       <div class="flex header-text-container">
         <div class="layout horizontal center-center" >
@@ -89,6 +89,9 @@
         return Object.assign(super.properties,
             {
               src:String,alt:String,
+              position:String,
+              noOverlay:Boolean,
+              paralax:Boolean,
             });
       }
 

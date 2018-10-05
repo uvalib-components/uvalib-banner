@@ -8,13 +8,14 @@
           position: relative;
           margin-top: -1px;
           margin-bottom: 25px;
+          height: var(--uvalib-image-header-height, 375px);
         }
 
         .header-image-area {
            position: absolute;
            top:0;
            bottom: 0;
-           height: 375px;
+           height: var(--uvalib-image-header-height, 375px);
            width: 100vw;
            z-index: 1;
 
@@ -40,6 +41,30 @@
           height: 375px;
           max-width: 75%;
         }
+        .header-text-container-block[blocked] {
+          position: absolute;
+          top: 0;
+          padding-top: calc(var(--uvalib-spacing-unit)*1);
+          padding-bottom: calc(var(--uvalib-spacing-unit)/5);
+          padding-left: calc(var(--uvalib-spacing-unit)*2);
+          padding-right: calc(var(--uvalib-spacing-unit)*2);
+          background-color: rgba(0, 0, 0, 0.5);
+          height: auto;
+          width: 425px;
+        }
+
+        :host([large-screen]) .header-text-container-block[blocked] {
+          position: absolute;
+          top: 0;
+          padding-top: calc(var(--uvalib-spacing-unit)*3);
+          padding-left: calc(var(--uvalib-spacing-unit)*2);
+          padding-right: calc(var(--uvalib-spacing-unit)*2);
+          background-color: rgba(0, 0, 0, 0.5);
+          height: auto;
+          width: 100%;
+          margin-bottom: calc(var(--uvalib-spacing-unit)*2);
+        }
+
         ::slotted(*) {
           margin: 0;
           z-index: 10;
@@ -56,6 +81,18 @@
           letter-spacing: 1px;
           text-align: center;
         }
+
+        .header-text-container div:first-child {
+          justify-content: center;
+          align-items: center;
+        }
+        .header-text-container-block {
+          justify-content: var(--uvalib-vertical-position, center);
+          align-content: stretch;
+          align-items: center;
+        }
+
+
       </style>
     </custom-style>
     <div class="header-container layout horizontal center-center">
@@ -64,8 +101,8 @@
         <iron-image src="[[src]]" atl="[[alt]]" sizing="cover" position="[[position]]"></iron-image>
       </div>
       <div class="flex header-text-container">
-        <div class="layout horizontal center-center" >
-          <div class="header-text-container-block layout vertical center-center">
+        <div class="layout horizontal"><!--center-center-->
+          <div class="header-text-container-block layout vertical" blocked$="[[fred]]"><!-- center-center-->
               <div id="header-h1"><slot name="header-title"></slot></div>
               <div id="header-p"><slot name="header-description"></slot></div>
           </div>
@@ -92,6 +129,7 @@
               position:String,
               noOverlay:Boolean,
               paralax:Boolean,
+              fred:Boolean,
             });
       }
 

@@ -14,6 +14,8 @@
     <link rel="import" href="../../iron-media-query/iron-media-query.html">
     <link rel="import" href="../uvalib-banners.html">
     <link rel="import" href="../../uva-models/uva-library.html">
+    <link rel="import" href="../../uvalib-models/uvalib-rt-models.html">
+
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
         uvalib-banners {
@@ -31,6 +33,18 @@
             <template>
               <uva-library path="web/banners" last-response="{{banners}}"></uva-library>
               <uvalib-banners banners="[[banners]]"></uvalib-banners>
+            </template>
+          </dom-bind>
+        </template>
+      </demo-snippet>
+
+      <h3>Realtime (Firebase) uvalib-banners demo</h3>
+      <demo-snippet>
+        <template>
+          <dom-bind>
+            <template>
+              <uvalib-rt-models path="/homebanners" data="{{rtbanners}}"></uvalib-rt-models>
+              <uvalib-banners banners="[[rtbanners]]"></uvalib-banners>
             </template>
           </dom-bind>
         </template>

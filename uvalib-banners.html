@@ -124,7 +124,7 @@
               function(){
                 if (this.banners && this.banners.length>1) {
                   // alert analytics that we have a view of a banner
-                  this.dispatchEvent(new CustomEvent('uvalib-analytics-event', {bubbles: true, composed: true, detail: {track:['banners','selected',selBanner.title]}}));
+                  this.dispatchEvent(new CustomEvent('uvalib-analytics-event', {bubbles: true, composed: true, detail: {track:['banners','selected',(selBanner)?selBanner.title:""]}}));
                   // message for a11y announcer
                   var newmessage = `Item ${this.selected+1} of ${this.banners.length}`;
                   // skip the first message which is on setup / init selection

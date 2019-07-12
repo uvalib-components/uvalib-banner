@@ -173,12 +173,14 @@
       }
 
       _getImage(banner) {
-        return (this.largeScreen)? banner.desktopImage.url:
+        return (!banner)? null:
+                  (this.largeScreen)? banner.desktopImage.url:
                               (this.mediumScreen)? banner.tabletImage.url:
                                               banner.phoneImage.url;
       }
       _getAlt(banner) {
-        return (this.largeScreen)? banner.desktopImage.alt:
+        return (!banner)? null:
+                  (this.largeScreen)? banner.desktopImage.alt:
                               (this.mediumScreen)? banner.tabletImage.alt:
                                               banner.phoneImage.alt;
       }

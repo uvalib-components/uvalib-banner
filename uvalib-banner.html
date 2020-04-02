@@ -121,13 +121,31 @@
           background-color: var(--uvalib-blue-500);
         }
       }
+      /*new buttons*/
+      .uvalib-btn {
+        color: white;
+        --alt-button-color: var(--uvalib-brand-blue);
+      }
+      .uvalib-btn:hover {
+        color: var(--uvalib-text-dark);
+        --alt-button-color: var(--uvalib-brand-blue-lightest)
+      }
+      :host([tone="Light"]) .uvalib-btn {
+        color: var(--uvalib-text-dark);
+        --alt-button-color: var(--uvalib-brand-blue-lightest);
+      }
+      :host([tone="Light"]) .uvalib-btn:hover {
+        color: white;
+        --alt-button-color: var(--uvalib-brand-blue);
+      }
       </style>
     </custom-style>
     <iron-image position="left" sizing="cover" src$="[[_getImage(obj)]]" alt$="[[_getAlt(obj)]]" style=""></iron-image>
     <div class="text-container">
       <div class="textTitle" hidden="[[!obj.displayTitle]]">[[obj.title]]</div>
       <div class="text" hidden="[[!obj.body]]" inner-h-t-m-l="[[obj.body]]"></div>
-      <a href="[[obj.link]]" tabindex="-1" hidden$="[[!obj.buttonText]]"><paper-button raised$="[[_isDark(obj.tone)]]">[[obj.buttonText]]</paper-button></a>
+      <!-- <a href="[[obj.link]]" tabindex="-1" hidden$="[[!obj.buttonText]]"><paper-button raised$="[[_isDark(obj.tone)]]">[[obj.buttonText]]</paper-button></a> -->
+      <a href="[[obj.link]]" class="uvalib-btn uvalib-btn-outline" hidden$="[[!obj.buttonText]]" raised$="[[_isDark(obj.tone)]]">[[obj.buttonText]]</a>
     </div>
   </template>
 

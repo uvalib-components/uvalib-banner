@@ -190,6 +190,10 @@
         super.ready();
       }
 
+      focus() {
+        this.shadowRoot.querySelector('a').focus();
+      }
+      
       _getImage(banner) {
         return (!banner)? null:
                   (this.largeScreen)? banner.desktopImage.url:

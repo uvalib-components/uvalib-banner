@@ -105,6 +105,10 @@
         Polymer.IronA11yAnnouncer.requestAvailability();
       }
 
+      focus() {
+        this.shadowRoot.querySelector('uvalib-banner').focus();
+      }
+
       _showThumbs(smallScreen, banners) {
         return (!smallScreen && this._moreThanOne(banners));
       }

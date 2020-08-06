@@ -182,6 +182,10 @@
             type: String,
             value: "Dark",
             reflectToAttribute: true
+          },
+          tabindex: {
+            type: Number,
+            value: 0
           }
         };
       }
@@ -193,7 +197,7 @@
       focus() {
         this.shadowRoot.querySelector('a').focus();
       }
-      
+
       _getImage(banner) {
         return (!banner)? null:
                   (this.largeScreen)? banner.desktopImage.url:
